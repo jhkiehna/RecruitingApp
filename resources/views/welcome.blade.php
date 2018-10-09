@@ -94,5 +94,14 @@
                 </div>
             </div>
         </div>
+
+        <form method="POST" action="admin">
+            @csrf
+
+            <input type="email" name="email" id="email" placeholser="enter email">
+            <input type="password" name="password" id="email" placeholder="enter password">
+
+            <input type="submit" name="submit" id="submit" value="log in">
+        </form>
     </body>
 </html>
