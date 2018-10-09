@@ -17,12 +17,12 @@ use Illuminate\Http\Request;
 //     return $request->user();
 // });
 
-Route::prefix('/candidate')->group(function() {
+Route::prefix('/candidate')->group(function () {
     Route::get('/', 'CandidateController@index');
     Route::post('/', 'CandidateController@store');
 });
 
-Route::prefix('/employer')->group(function() {
+Route::prefix('/employer')->group(function () {
     Route::get('/', 'EmployerController@index');
     Route::post('/', 'EmployerController@store');
 });
