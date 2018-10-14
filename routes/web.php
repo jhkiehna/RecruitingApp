@@ -17,8 +17,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware('auth')->prefix('admin')->namespace('Admin')->group(function () {
-    Route::get('/', 'AdminPanelController@index');
-});
-
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/dashboard', 'AdminController@index')->name('dashboard');
