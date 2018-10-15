@@ -17,6 +17,8 @@
                     You are logged in!
 
                     @include('admin.partials.candidates')
+
+                    @include('admin.partials.employers')
                 </div>
             </div>
         </div>
