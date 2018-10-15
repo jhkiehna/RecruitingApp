@@ -15,6 +15,8 @@
                     @endif
 
                     You are logged in!
+
+                    @include('admin.partials.candidates')
                 </div>
             </div>
         </div>
