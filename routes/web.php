@@ -18,3 +18,15 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', 'AdminController@index')->name('dashboard');
+
+Route::prefix('/dashboard')->middleware('auth')->group(function () {
+    Route::prefix('/candidate')->group(function () {
+        Route::get('/create-candidate', 'CandidateController@create')->name('create.candidate');
+        Route::post('/', 'CandidateController@store')->name('store.candidate');
+    });
+});
+
+Route::prefix('/employer')->middleware('auth:api')->group(function () {
+    Route::get('/', 'EmployerController@index');
+    Route::post('/', 'EmployerController@store');
+});

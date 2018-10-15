@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Candidate;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
 
 class CandidateController extends Controller
 {
@@ -14,8 +15,7 @@ class CandidateController extends Controller
      */
     public function index()
     {
-        //
-        $this->reload();
+        return DataTables::of(Candidate::class)->toJson();
     }
 
     /**
@@ -25,7 +25,7 @@ class CandidateController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin/newCandidate');
     }
 
     /**
@@ -36,7 +36,23 @@ class CandidateController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate(
+        [
+            'walterID' => 'required|alpha_num|unique:candidates,walter_id|max:10',
+            'firstName' => 'required|alpha|max:255',
+            'lastName' => 'required|alpha|max:255',
+            'email' => 'required|max:255|unique:users,email',
+            'phone' => 'max:20|numeric',
+            'addr1' => 'max:255',
+            'addr2' => 'max:255',
+            'city' => 'alpha|max:255',
+            'state' => 'alpha|max:2',
+        ],
+        [
+            'required' => 'blah blah'
+        ]);
+
+        
     }
 
     /**
