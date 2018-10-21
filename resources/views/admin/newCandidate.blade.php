@@ -80,7 +80,7 @@
                             </div>
                         </div>
                         
-                        <button type="submit" class="btn btn-primary">Add This Candidate</button>
+                        <button type="submit" class="btn btn-primary">Add to Candidates</button>
                     </form>
                 </div>
             </div>

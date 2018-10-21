@@ -15,7 +15,19 @@ class CandidateController extends Controller
      */
     public function index()
     {
-        return DataTables::of(Candidate::class)->toJson();
+        // $candidates = Candidate::all()->transform(function ($candidate) {
+        //     return $candidate->transformer();
+        // });
+
+        $candidates = Candidate::all();
+
+        $transformedCandidates = $candidates->map(function ($item) {
+            return $item->transformer();
+        });
+        
+        return DataTables::of($transformedCandidates)->make(true);
+
+        // return DataTables::of($candidates)->make(true);
     }
 
     /**
@@ -38,7 +50,7 @@ class CandidateController extends Controller
     {
         $request->validate(
             [
-                'walterID' => 'required|alpha_num|unique:candidates,walter_id|max:10|min:10',
+                'walterID' => 'numeric|unique:candidates,walter_id|nullable',
                 'firstName' => 'required|alpha|max:255',
                 'lastName' => 'required|alpha|max:255',
                 'email' => 'required|max:255|unique:users,email',
@@ -49,11 +61,8 @@ class CandidateController extends Controller
                 'state' => 'alpha|max:2|nullable',
             ],
             [
-                'walterID.required' => 'Please provide this candidate\'s Walter ID',
-                'walterID.alpha_num' => 'A Walter ID can only contain letters and numbers',
                 'walterID.unique' => 'There is already a candidate in the database with this Walter ID',
-                'walterID.max' => 'A Walter Id must be exactly 10 characters',
-                'walterID.min' => 'A Walter Id must be exactly 10 characters',
+                'walterID.numeric' => 'A Walter Id can only contain numbers',
 
                 'firstName.required' => 'First Name is required',
                 'firstName.alpha' => 'First Name can only contain letters',
