@@ -21,9 +21,6 @@ Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm'
 Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 
-
-
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -31,7 +28,8 @@ Route::get('/', function () {
 Route::get('/dashboard', 'AdminController@index')->name('dashboard');
 
 Route::prefix('/dashboard')->middleware('auth')->group(function () {
-    Route::prefix('/candidate')->group(function () {
+    Route::prefix('/candidates')->group(function () {
+        Route::get('/', 'CandidateController@index')->name('index.candidates');
         Route::get('/create-candidate', 'CandidateController@create')->name('create.candidate');
         Route::post('/', 'CandidateController@store')->name('store.candidate');
     });
