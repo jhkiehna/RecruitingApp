@@ -47,6 +47,11 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="company">Company</label>
+                            <input class="form-control {{$errors->has('company') ? 'alert alert-danger' : ''}}" type="text" name="company" id="company" placeholder="..." value="{{old('company')}}">
+                        </div>
+
+                        <div class="form-group">
                             <label for="email">Email</label>
                             <input class="form-control {{$errors->has('email') ? 'alert alert-danger' : ''}}" type="email" name="email" id="email" placeholder="..." value="{{old('email')}}">
                         </div>
@@ -55,32 +60,8 @@
                             <label for="phone">Phone Number</label>
                             <input class="form-control {{$errors->has('phone') ? 'alert alert-danger' : ''}}" type="text" name="phone" id="phone" placeholder="..." value="{{old('phone')}}">
                         </div>
-
-                        <div class="form-row">
-                            <div class="form-group col-9">
-                                <label for="firstName">Street Address</label>
-                                <input class="form-control {{$errors->has('addr1') ? 'alert alert-danger' : ''}}" type="text" name="addr1" id="addr1" placeholder="..." value="{{old('addr1')}}">
-                            </div>
-
-                            <div class="form-group col-3">
-                                <label for="firstName">Suite or Apt. #</label>
-                                <input class="form-control {{$errors->has('addr2') ? 'alert alert-danger' : ''}}" type="text" name="addr2" id="addr2" placeholder="..." value="{{old('addr2')}}">
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group col-9">
-                                <label for="City">City</label>
-                                <input class="form-control {{$errors->has('city') ? 'alert alert-danger' : ''}}" type="text" name="city" id="city" placeholder="..." value="{{old('city')}}">
-                            </div>
-
-                            <div class="form-group col-3">
-                                <label for="firstName">State</label>
-                                <input class="form-control {{$errors->has('state') ? 'alert alert-danger' : ''}}" type="text" name="state" id="state" placeholder="..." value="{{old('state')}}">
-                            </div>
-                        </div>
                         
-                        <button type="submit" class="btn btn-primary">Add to Candidates</button>
+                        <button type="submit" class="btn btn-primary">Add to Employers</button>
                     </form>
                 </div>
             </div>

@@ -46,6 +46,7 @@ class EmployerController extends Controller
                 'walterID' => 'numeric|unique:employers,walter_id|nullable',
                 'firstName' => 'required|alpha|max:255',
                 'lastName' => 'required|alpha|max:255',
+                'company' => 'required|max:255',
                 'email' => 'required|max:255|unique:users,email',
                 'phone' => 'max:20|nullable',
             ],
@@ -61,6 +62,9 @@ class EmployerController extends Controller
                 'lastName.alpha' => 'Last Name can only contain letters',
                 'lastName.max' => 'The Last Name you entered is too long',
 
+                'company.required' => 'A company name is required for employers',
+                'company.max' => 'The company name cannot be longer than 255 characters',
+
                 'email.required' => 'Email is required',
                 'email.max' => 'The Email you entered is too long',
                 'email.uniue' => 'The is already a Candidate in the database with this Email',
@@ -69,10 +73,11 @@ class EmployerController extends Controller
             ]
         );
         try {
-            Candidate::create([
+            Employer::create([
                 'walter_id' => $request->walterID,
                 'first_name' => $request->firstName,
                 'last_name' => $request->lastName,
+                'company' => $request->company,
                 'email' => $request->email,
                 'phone' => $request->phone,
             ]);
@@ -80,7 +85,7 @@ class EmployerController extends Controller
             return $this->response($e->getMessage(), 500);
         }
 
-        return redirect()->route('dashboard')->withStatus($request->firstName. ' ' .$request->lastName. ' was successfully added to Candidates!');
+        return redirect()->route('dashboard')->withStatus($request->firstName. ' ' .$request->lastName. ' was successfully added to Employers!');
     }
 
     /**
