@@ -21,7 +21,7 @@
 <script defer>
     $(document).ready(function () {
 
-        $('#candidatesTable').DataTable({
+        $('#employersTable').DataTable({
             processing: true,
             serverSide: true,
             ajax: "{{ route('index.employers') }}",
