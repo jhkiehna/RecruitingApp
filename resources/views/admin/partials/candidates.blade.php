@@ -16,10 +16,10 @@
     </table>
 </div>
 
-@section('scripts')
+@section('candidateScripts')
 <script defer>
     $(document).ready(function () {
-
+        console.log("candidate script ran");
         $('#candidatesTable').DataTable({
             processing: true,
             serverSide: true,
