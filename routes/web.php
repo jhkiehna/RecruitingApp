@@ -33,9 +33,12 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
         Route::get('/create-candidate', 'CandidateController@create')->name('create.candidate');
         Route::post('/', 'CandidateController@store')->name('store.candidate');
     });
+
+    Route::prefix('/employers')->group(function () {
+        Route::get('/', 'EmployerController@index')->name('index.employers');
+        Route::get('/create-employer', 'EmployerController@create')->name('create.employer');
+        Route::post('/', 'EmployerController@store')->name('store.employer');
+    });
 });
 
-Route::prefix('/employer')->middleware('auth:api')->group(function () {
-    Route::get('/', 'EmployerController@index');
-    Route::post('/', 'EmployerController@store');
-});
+

@@ -15,19 +15,13 @@ class CandidateController extends Controller
      */
     public function index()
     {
-        // $candidates = Candidate::all()->transform(function ($candidate) {
-        //     return $candidate->transformer();
-        // });
-
         $candidates = Candidate::all();
 
-        $transformedCandidates = $candidates->map(function ($item) {
-            return $item->transformer();
+        $transformedCandidates = $candidates->map(function ($candidate) {
+            return $candidate->transformer();
         });
         
         return DataTables::of($transformedCandidates)->make(true);
-
-        // return DataTables::of($candidates)->make(true);
     }
 
     /**

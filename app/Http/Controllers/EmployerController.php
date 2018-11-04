@@ -14,7 +14,13 @@ class EmployerController extends Controller
      */
     public function index()
     {
-        //
+        $employers = Employer::all();
+
+        $transformedEmployers = $employers->map(function ($employer) {
+            return $employer->transformer();
+        });
+        
+        return DataTables::of($transformedEmployers)->make(true);
     }
 
     /**
