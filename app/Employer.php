@@ -18,10 +18,6 @@ class Employer extends Model
         'company',
         'email',
         'phone',
-        'street_address_1',
-        'street_address_2',
-        'city',
-        'state',
     ];
 
     protected $dates = [
@@ -34,8 +30,8 @@ class Employer extends Model
     {
         return [
             'walter_id' => $this->walter_id,
-            'company' => $this->company,
             'name' => $this->full_name,
+            'company' => $this->company,
             'phone' => $this->phone,
             'email' => $this->email
         ];
