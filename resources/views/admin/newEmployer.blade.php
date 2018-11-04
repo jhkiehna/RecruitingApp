@@ -26,7 +26,7 @@
                         </div>
                     @endif
 
-                    <form action="{{ route('store.employer') }}" method="POST">
+                    <form action="{{ route('store.employer') }}" method="POST" autocomplete="off">
                         @csrf
 
                         <div class="form-group">

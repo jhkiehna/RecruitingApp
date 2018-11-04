@@ -30,7 +30,7 @@ class EmployerController extends Controller
      */
     public function create()
     {
-        return view('admin/newCandidate');
+        return view('admin/newEmployer');
     }
 
     /**
