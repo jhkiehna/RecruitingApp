@@ -20,7 +20,7 @@
 @section('employerScripts')
 <script defer>
     $(document).ready(function () {
-        console.log("employer script ran");
+        
         $('#employersTable').DataTable({
             processing: true,
             serverSide: true,

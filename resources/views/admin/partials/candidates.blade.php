@@ -11,6 +11,7 @@
                 <th>Name</th>
                 <th>Phone</th>
                 <th>Email</th>
+                <th>Action</th>
             </tr>
         </thead>
     </table>
@@ -19,7 +20,7 @@
 @section('candidateScripts')
 <script defer>
     $(document).ready(function () {
-        console.log("candidate script ran");
+        
         $('#candidatesTable').DataTable({
             processing: true,
             serverSide: true,
@@ -28,7 +29,10 @@
                 {data: 'walter_id', name: 'walter_id'},
                 {data: 'name', name: 'name'},
                 {data: 'phone', name: 'phone'},
-                {data: 'email', name: 'email'}
+                {data: 'email', name: 'email'},
+                {data: null, name: 'actions', render: function (data, type, row) {
+                    return '<button class="btn btn-info btn-sm">Send Email</button>';
+                }}
             ]
         });
     });
