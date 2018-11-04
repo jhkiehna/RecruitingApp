@@ -81,6 +81,7 @@
         </main>
     </div>
 
-    @yield('scripts')
+    @yield('candidateScripts')
+    @yield('employerScripts')
 </body>
 </html>
