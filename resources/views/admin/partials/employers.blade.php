@@ -28,6 +28,7 @@
             columns: [
                 {data: 'walter_id', name: 'walter_id'},
                 {data: 'name', name: 'name'},
+                {data: 'company', name: 'company'},
                 {data: 'phone', name: 'phone'},
                 {data: 'email', name: 'email'}
             ]
