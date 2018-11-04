@@ -2,7 +2,7 @@
     <br>
     <h2>Candidates</h2>
 
-    <a href="{{ route('create.candidate') }}">New Candidate</a>
+    <a href="{{ route('create.candidate') }}">Add a Candidate</a>
 
     <table id="candidatesTable" class="display" style="width:100%">
         <thead>
