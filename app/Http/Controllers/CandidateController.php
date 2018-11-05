@@ -49,8 +49,8 @@ class CandidateController extends Controller
                 'lastName'      => 'required|alpha|max:255',
                 'email'         => 'required|max:255|unique:users,email',
                 'phone'         => 'max:20|nullable',
-                'city'          => 'alpha_num|max:255',
-                'state'         => 'alpha|max:2',
+                'city'          => 'alpha_dash|max:255|nullable',
+                'state'         => 'alpha|max:2|nullable',
                 'industry'      => 'required|max:255|alpha_num',
                 'summary'       => 'required|max:255',
             ],
@@ -72,7 +72,7 @@ class CandidateController extends Controller
 
                 'phone.max'             => 'A phone number cannot be longer than 20 digits',
 
-                'city.alpha_num'        => 'The city can only contain letters and numbers',
+                'city.alpha_dash'            => 'The city can only contain letters and dashes',
                 'city.max'              => 'The city cannot be longer than 255 characters',
 
                 'state.alpha'           => 'The state can only contain letters',

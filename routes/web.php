@@ -32,6 +32,7 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
         Route::get('/', 'CandidateController@index')->name('index.candidates');
         Route::get('/create-candidate', 'CandidateController@create')->name('create.candidate');
         Route::post('/', 'CandidateController@store')->name('store.candidate');
+        Route::get('{candidateId}/edit-candidate', 'CandidateController@edit')->name('edit.candidate.{candidateId}');
     });
 
     Route::prefix('/employers')->group(function () {
