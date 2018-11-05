@@ -13,8 +13,8 @@ class NotifyClient extends Mailable
 {
     use Queueable, SerializesModels;
 
-    protected $candidateModel;
-    protected $employerModel;
+    protected $candidates;
+    protected $employer;
     protected $fromAddress;
     protected $fromName;
 
@@ -23,10 +23,13 @@ class NotifyClient extends Mailable
      *
      * @return void
      */
-    public function __construct(Candidate $candidateModel, Employer $employerModel)
+    public function __construct($candidateIds, $employerId)
     {
-        $this->candidateModel = $candidateModel;
-        $this->employerModel = $employerModel;
+        $candidates = $candidateIds->map(function ($candidateId) {
+            return Candidate::findOrFail('id', $candidateId)->first()->mailTransform();
+        });
+        $employer = Employer::findOrFail('id', $employerId)->first()->mailTransform();
+
         $this->fromAddress = config('mail.from.address');
         $this->fromName = config('mail.from.name');
     }
@@ -38,18 +41,6 @@ class NotifyClient extends Mailable
      */
     public function build()
     {
-        //get employer Id somehow
-        //get list of candidates somehow
-        //placeholders for now until I firgure out how this info is passed in
-        $candidateIds = collect(1,2,3);
-        $employerId = 1;
-
-        $candidates = $candidateIds->map(function ($candidateId) {
-            return $this->candidateModel::findOrFail('id', $candidateId)->first()->mailTransform();
-        });
-
-        $employer = $this->employerModel::findOrFail('id', $employerId)->first();
-
         return $this->from($this->fromAddress)
             ->view('email.html.notifyClient')
             ->text('email.text.notifyClient')
