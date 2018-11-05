@@ -78,11 +78,38 @@
                             <textarea class="form-control {{$errors->has('summary') ? 'alert alert-danger' : ''}}" rows="3" name="summary" id="summary" placeholder="candidate position description...">{{ old('summary') ?? $candidate->summary }}</textarea>
                         </div>
                         
-                        <button type="submit" class="btn btn-primary">Update {{ $candidate->full_name }}</button>
+                        <button type="submit" class="btn btn-primary btn-block">Update {{ $candidate->full_name }}</button>
+                    </form>
+                    <br>
+                    <form id="#deleteCandidateForm" action="{{ route('delete.candidate', ['id' => $candidate->id]) }}" method="POST">
+                        @csrf
+
+                        <p class="alert alert-danger" id="deleteWarning" hidden></p>
+                        <button type="button" id="deleteCandidateButton" class="btn btn-primary btn-sm float-right">Delete {{ $candidate->full_name }}</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+@endsection
+
+@section('candidateScripts')
+<script defer>
+    $(document).ready(function () {
+        console.log("script running");
+
+        var deleteForm = $("#deleteCandidateForm");
+        
+        $("#deleteCandidateButton").click(function() {
+            $("#deleteWarning").removeAttr("hidden").text("Are you sure you want to delete {{ $candidate->full_name }}? Press the button again to confirm.");
+            $("#deleteCandidateButton").text("Really Delete {{ $candidate->full_name }}?");
+
+            $("#deleteCandidateButton").click(function() {
+                console.log("click");
+                deleteForm.submit();
+            });
+        });
+    });
+</script>
 @endsection

@@ -208,8 +208,10 @@ class CandidateController extends Controller
      * @param  \App\Candidate  $candidate
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Candidate $candidate)
+    public function destroy(Request $request, $candidateId)
     {
-        //
+        $candidate = Candidate::findOrFail($candidateId)->delete();
+
+        return redirect()->route('dashboard')->withStatus($request->firstName. ' ' .$request->lastName. ' was successfully deleted!');
     }
 }

@@ -34,6 +34,7 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
         Route::post('/', 'CandidateController@store')->name('store.candidate');
         Route::get('{candidateId}/edit-candidate', 'CandidateController@edit')->name('edit.candidate');
         Route::post('{candidateId}/update-candidate', 'CandidateController@update')->name('update.candidate');
+        Route::post('{candidateId}/delete-candidate', 'CandidateController@destroy')->name('delete.candidate');
     });
 
     Route::prefix('/employers')->group(function () {
