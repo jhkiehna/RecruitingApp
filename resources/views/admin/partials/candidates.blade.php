@@ -2,8 +2,6 @@
     <br>
     <h2>Candidates</h2>
 
-    <a href="{{ route('create.candidate') }}">Add a Candidate</a>
-
     <table id="candidatesTable" class="display" style="width:100%">
         <thead>
             <tr>
@@ -30,9 +28,13 @@
                 {data: 'name', name: 'name'},
                 {data: 'phone', name: 'phone'},
                 {data: 'email', name: 'email'},
-                {data: null, name: 'actions', render: function (data, type, row) {
-                    return '<button class="btn btn-info btn-sm">Send Email</button>';
-                }}
+                {
+                    data: null, 
+                    name: 'actions', 
+                    render: function (data, type, row) {
+                        return '<button class="btn btn-info btn-sm btn-block font-weight-bold">Email '+data.name+'</button>';
+                    }
+                }
             ]
         });
     });

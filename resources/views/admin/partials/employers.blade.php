@@ -12,6 +12,7 @@
                 <th>Company</th>
                 <th>Phone</th>
                 <th>Email</th>
+                <th>Actions</th>
             </tr>
         </thead>
     </table>
@@ -30,7 +31,14 @@
                 {data: 'name', name: 'name'},
                 {data: 'company', name: 'company'},
                 {data: 'phone', name: 'phone'},
-                {data: 'email', name: 'email'}
+                {data: 'email', name: 'email'},
+                {
+                    data: null, 
+                    name: 'actions', 
+                    render: function (data, type, row) {
+                        return '<button class="btn btn-info btn-sm btn-block font-weight-bold">Email '+data.name+'</button>';
+                    }
+                }
             ]
         });
     });

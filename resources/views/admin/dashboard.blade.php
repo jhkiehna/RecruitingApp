@@ -13,12 +13,19 @@
                             {{ session('status') }}
                         </div>
                     @endif
+                    <div class="row">
+                        <div class="col">
+                            <a class="btn btn-info btn-block font-weight-bold" href="{{ route('create.employer') }}">Add an Employer</a>
+                        </div>
 
-                    You are logged in!
-
-                    @include('admin.partials.candidates')
+                        <div class="col">
+                            <a class="btn btn-info btn-block font-weight-bold" href="{{ route('create.candidate') }}">Add a Candidate</a>
+                        </div>
+                    </div>
 
                     @include('admin.partials.employers')
+
+                    @include('admin.partials.candidates')
                 </div>
             </div>
         </div>
