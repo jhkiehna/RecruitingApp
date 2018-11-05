@@ -39,6 +39,6 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
         Route::get('/create-employer', 'EmployerController@create')->name('create.employer');
         Route::post('/', 'EmployerController@store')->name('store.employer');
     });
+
+    Route::post('/sendClientNotification/{employerId}', 'NotifyClientController@send')->name('email.client');
 });
-
-
