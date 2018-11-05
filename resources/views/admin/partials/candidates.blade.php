@@ -7,6 +7,9 @@
             <tr>
                 <th>Walter ID</th>
                 <th>Name</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Industry</th>
                 <th>Phone</th>
                 <th>Email</th>
                 <th>Action</th>

@@ -17,6 +17,10 @@ class Candidate extends Model
         'last_name',
         'email',
         'phone',
+        'city',
+        'state',
+        'industry',
+        'summary',
     ];
 
     protected $dates = [
@@ -30,8 +34,12 @@ class Candidate extends Model
         return [
             'walter_id' => $this->walter_id,
             'name' => $this->full_name,
+            'city' => $this->city,
+            'state' => $this->state,
             'phone' => $this->phone,
-            'email' => $this->email
+            'email' => $this->email,
+            'industry' => $this->industry,
+            'summary' => $this->summary,
         ];
     }
 
@@ -50,5 +58,10 @@ class Candidate extends Model
     public function getFullNameAttribute()
     {
         return $this->first_name .' '. $this->last_name;
+    }
+
+    public function setStateAttribute($value)
+    {
+        $this->attributes['state'] = strtoupper($value);
     }
 }

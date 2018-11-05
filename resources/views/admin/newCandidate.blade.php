@@ -55,6 +55,28 @@
                             <label for="phone">Phone Number</label>
                             <input class="form-control {{$errors->has('phone') ? 'alert alert-danger' : ''}}" type="text" name="phone" id="phone" placeholder="..." value="{{old('phone')}}">
                         </div>
+
+                        <div class="form-row">
+                            <div class="form-group col">
+                                <label for="city">City</label>
+                                <input class="form-control {{$errors->has('city') ? 'alert alert-danger' : ''}}" type="text" name="city" id="city" placeholder="..." value="{{old('city')}}">
+                            </div>
+
+                            <div class="form-group col">
+                                <label for="state">State</label>
+                                <input class="form-control {{$errors->has('state') ? 'alert alert-danger' : ''}}" type="text" name="state" id="state" placeholder="..." value="{{old('state')}}">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="industry">Industry</label>
+                            <input class="form-control {{$errors->has('industry') ? 'alert alert-danger' : ''}}" type="text" name="industry" id="industry" placeholder="working in..." value="{{old('industry')}}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="summary">Summary</label>
+                            <textarea class="form-control {{$errors->has('summary') ? 'alert alert-danger' : ''}}" rows="3" name="summary" id="summary" placeholder="candidate position description..." value="{{old('summary')}}"></textarea>
+                        </div>
                         
                         <button type="submit" class="btn btn-primary">Add to Candidates</button>
                     </form>
