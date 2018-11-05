@@ -41,7 +41,9 @@
                     data: null, 
                     name: 'actions', 
                     render: function (data, type, row) {
-                        return '<button class="btn btn-info btn-sm btn-block font-weight-bold">Email '+data.name+'</button>';
+                        return `
+                            <a class="btn btn-info btn-sm btn-block" href="/dashboard/candidates/${data.id}/edit-candidate">Edit ${data.name}</a>
+                            <a class="btn btn-info btn-sm btn-block font-weight-bold" href="/sendCandidateNotification/${data.id}">Email ${data.name}</a>`;
                     }
                 }
             ]

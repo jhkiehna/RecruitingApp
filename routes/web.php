@@ -32,7 +32,8 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
         Route::get('/', 'CandidateController@index')->name('index.candidates');
         Route::get('/create-candidate', 'CandidateController@create')->name('create.candidate');
         Route::post('/', 'CandidateController@store')->name('store.candidate');
-        Route::get('{candidateId}/edit-candidate', 'CandidateController@edit')->name('edit.candidate.{candidateId}');
+        Route::get('{candidateId}/edit-candidate', 'CandidateController@edit')->name('edit.candidate');
+        Route::post('{candidateId}/update-candidate', 'CandidateController@update')->name('update.candidate');
     });
 
     Route::prefix('/employers')->group(function () {
@@ -42,4 +43,5 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
     });
 
     Route::post('/sendClientNotification/{employerId}', 'NotifyClientController@send')->name('email.client');
+    Route::post('/sendCandidateNotification/{candidateId}', 'NotifyClientController@send')->name('email.candidate');
 });
