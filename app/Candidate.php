@@ -25,7 +25,7 @@ class Candidate extends Model
         'deleted_at',
     ];
 
-    public function transformer()
+    public function transform()
     {
         return [
             'walter_id' => $this->walter_id,
@@ -33,6 +33,13 @@ class Candidate extends Model
             'phone' => $this->phone,
             'email' => $this->email
         ];
+    }
+
+    public function mailTransform()
+    {
+        return [
+            'testField' => 'test test'
+        ]
     }
 
     public function getWalterIdAttribute($walter_id)

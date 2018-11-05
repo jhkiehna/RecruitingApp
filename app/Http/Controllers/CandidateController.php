@@ -18,7 +18,7 @@ class CandidateController extends Controller
         $candidates = Candidate::all();
 
         $transformedCandidates = $candidates->map(function ($candidate) {
-            return $candidate->transformer();
+            return $candidate->transform();
         });
         
         return DataTables::of($transformedCandidates)->make(true);

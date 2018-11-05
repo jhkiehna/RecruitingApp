@@ -18,7 +18,7 @@ class EmployerController extends Controller
         $employers = Employer::all();
 
         $transformedEmployers = $employers->map(function ($employer) {
-            return $employer->transformer();
+            return $employer->transform();
         });
         
         return DataTables::of($transformedEmployers)->make(true);
