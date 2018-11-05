@@ -39,7 +39,7 @@ class Candidate extends Model
     {
         return [
             'testField' => 'test test'
-        ]
+        ];
     }
 
     public function getWalterIdAttribute($walter_id)

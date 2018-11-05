@@ -43,7 +43,7 @@ class Employer extends Model
             'name' => $this->full_name,
             'company' => $this->company,
             'email' => $this->email
-        ]
+        ];
     }
 
     public function getWalterIdAttribute($walter_id)
