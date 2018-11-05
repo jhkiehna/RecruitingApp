@@ -51,8 +51,8 @@ class NotifyClient extends Mailable
         $employer = $this->employerModel::findOrFail('id', $employerId)->first();
 
         return $this->from($this->fromAddress)
-            ->view('view.name')
-            ->text('view.name')
+            ->view('email.html.notifyClient')
+            ->text('email.text.notifyClient')
             ->with([
                 'candidates' => $this->candidates,
                 'employer' => $this->employer
