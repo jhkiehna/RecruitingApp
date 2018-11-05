@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Add a New Candidate</div>
+                <div class="card-header">Add a New Employer</div>
 
                 <div class="card-body">
                     <a href="{{ route('dashboard') }}">Back to Dashboard</a>
@@ -26,7 +26,7 @@
                         </div>
                     @endif
 
-                    <form action="{{ route('store.candidate') }}" method="POST" autocomplete="off">
+                    <form action="{{ route('store.employer') }}" method="POST" autocomplete="off">
                         @csrf
 
                         <div class="form-group">
@@ -47,6 +47,11 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="company">Company</label>
+                            <input class="form-control {{$errors->has('company') ? 'alert alert-danger' : ''}}" type="text" name="company" id="company" placeholder="..." value="{{old('company')}}">
+                        </div>
+
+                        <div class="form-group">
                             <label for="email">Email</label>
                             <input class="form-control {{$errors->has('email') ? 'alert alert-danger' : ''}}" type="email" name="email" id="email" placeholder="..." value="{{old('email')}}">
                         </div>
@@ -56,7 +61,7 @@
                             <input class="form-control {{$errors->has('phone') ? 'alert alert-danger' : ''}}" type="text" name="phone" id="phone" placeholder="..." value="{{old('phone')}}">
                         </div>
                         
-                        <button type="submit" class="btn btn-primary">Add to Candidates</button>
+                        <button type="submit" class="btn btn-primary">Add to Employers</button>
                     </form>
                 </div>
             </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Employer;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
 
 class EmployerController extends Controller
 {
@@ -14,7 +15,13 @@ class EmployerController extends Controller
      */
     public function index()
     {
-        //
+        $employers = Employer::all();
+
+        $transformedEmployers = $employers->map(function ($employer) {
+            return $employer->transformer();
+        });
+        
+        return DataTables::of($transformedEmployers)->make(true);
     }
 
     /**
@@ -24,7 +31,7 @@ class EmployerController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin/newEmployer');
     }
 
     /**
@@ -35,7 +42,51 @@ class EmployerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate(
+            [
+                'walterID' => 'numeric|unique:employers,walter_id|nullable',
+                'firstName' => 'required|alpha|max:255',
+                'lastName' => 'required|alpha|max:255',
+                'company' => 'required|max:255',
+                'email' => 'required|max:255|unique:users,email',
+                'phone' => 'max:20|nullable',
+            ],
+            [
+                'walterID.unique' => 'There is already a candidate in the database with this Walter ID',
+                'walterID.numeric' => 'A Walter Id can only contain numbers',
+
+                'firstName.required' => 'First Name is required',
+                'firstName.alpha' => 'First Name can only contain letters',
+                'firstName.max' => 'The First Name you entered is too long',
+
+                'lastName.required' => 'Last Name is required',
+                'lastName.alpha' => 'Last Name can only contain letters',
+                'lastName.max' => 'The Last Name you entered is too long',
+
+                'company.required' => 'A company name is required for employers',
+                'company.max' => 'The company name cannot be longer than 255 characters',
+
+                'email.required' => 'Email is required',
+                'email.max' => 'The Email you entered is too long',
+                'email.uniue' => 'The is already a Candidate in the database with this Email',
+
+                'phone.max' => 'A phone number cannot be longer than 20 digits',
+            ]
+        );
+        try {
+            Employer::create([
+                'walter_id' => $request->walterID,
+                'first_name' => $request->firstName,
+                'last_name' => $request->lastName,
+                'company' => $request->company,
+                'email' => $request->email,
+                'phone' => $request->phone,
+            ]);
+        } catch (Exception $e) {
+            return $this->response($e->getMessage(), 500);
+        }
+
+        return redirect()->route('dashboard')->withStatus($request->firstName. ' ' .$request->lastName. ' was successfully added to Employers!');
     }
 
     /**

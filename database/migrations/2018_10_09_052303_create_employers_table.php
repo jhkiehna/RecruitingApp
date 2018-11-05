@@ -21,10 +21,6 @@ class CreateEmployersTable extends Migration
             $table->string('company');
             $table->string('email');
             $table->string('phone')->nullable();
-            $table->string('street_address_1')->nullable();
-            $table->string('street_address_2')->nullable();
-            $table->string('city')->nullable();
-            $table->string('state')->nullable();
 
             $table->timestamps();
             $table->softDeletes();

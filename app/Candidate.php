@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Candidate extends Model
 {
+    use SoftDeletes;
+
     protected $table = 'candidates';
 
     protected $fillable = [
@@ -14,10 +17,12 @@ class Candidate extends Model
         'last_name',
         'email',
         'phone',
-        'street_address_1',
-        'street_address_2',
-        'city',
-        'state',
+    ];
+
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at',
     ];
 
     public function transformer()
@@ -25,9 +30,6 @@ class Candidate extends Model
         return [
             'walter_id' => $this->walter_id,
             'name' => $this->full_name,
-            'address' => $this->full_address,
-            'city' => $this->city,
-            'state' => $this->state,
             'phone' => $this->phone,
             'email' => $this->email
         ];
@@ -41,10 +43,5 @@ class Candidate extends Model
     public function getFullNameAttribute()
     {
         return $this->first_name .' '. $this->last_name;
-    }
-
-    public function getFullAddressAttribute()
-    {
-        return $this->street_address_1 .', '. $this->street_address_2;
     }
 }
