@@ -92,12 +92,14 @@ class EmployerController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Employer  $employer
+     * @param  $employerId
      * @return \Illuminate\Http\Response
      */
-    public function show(Employer $employer)
+    public function show($employerId)
     {
-        //
+        $employer = Employer::find($employerId);
+
+        return json_encode($employer);
     }
 
     /**

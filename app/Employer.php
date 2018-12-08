@@ -29,6 +29,7 @@ class Employer extends Model
     public function transform()
     {
         return [
+            'id' => $this->id,
             'walter_id' => $this->walter_id,
             'name' => $this->full_name,
             'company' => $this->company,

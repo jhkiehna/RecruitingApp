@@ -36,10 +36,34 @@
                     data: null, 
                     name: 'actions', 
                     render: function (data, type, row) {
-                        return '<button class="btn btn-info btn-sm btn-block font-weight-bold">Email '+data.name+'</button>';
+                        return '<button class="btn btn-info btn-sm btn-block font-weight-bold email-employer" data-toggle="modal" data-target="#email-employer-modal" data-employer-id="'+data.id+'">Email '+data.name+'</button>';
                     }
                 }
             ]
+        });
+
+        $('#email-employer-modal').on('show.bs.modal', function (event) {
+            var modal = $(this);
+            var empId = $(event.relatedTarget).data('employer-id');
+            modal.find('#employer-id-hidden-field').val(empId)
+
+            $.ajax({
+                url: `dashboard/employers/show-employer/${empId}`,
+                async: true,
+                success: function(response) {
+                    console.log(response);
+                    modal.find('h5#email-employer-modal-title').text('Email ' + response.email)        
+                }
+            });
+
+            
+            
+
+            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+            // var modal = $(this)
+            
+            
         });
     });
 </script>

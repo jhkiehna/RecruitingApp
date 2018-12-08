@@ -2,6 +2,8 @@
     <br>
     <h2>Candidates</h2>
 
+    <a href="{{ route('create.candidate') }}">Add a Candidate</a>
+
     <table id="candidatesTable" class="display compact" style="width:100%">
         <thead>
             <tr>
