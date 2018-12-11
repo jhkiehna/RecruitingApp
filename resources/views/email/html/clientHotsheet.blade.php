@@ -12,8 +12,7 @@
         <tr>
             <td valign="center" style="color: #505050; font-family: Helvetica, sans-serif; font-size: 16px; line-height: 150%; text-align: left; padding: 12px 20px;">
                 <h1 style="color: #505050; font-family: 'Trebuchet MS', Verdana, Arial, sans-serif; font-size: 18px; line-height: 110%; text-align: left; font-weight: bold;">
-                    Top {{ $industry }} Candidates on the
-                    Market
+                    Top {{ $industry }} Candidates on the Market
                 </h1>
                 <p style="color: #505050; font-family: 'Trebuchet MS', Verdana, Arial, sans-serif; font-size: 12px; line-height: 110%; text-align: left;">
                     At Kimmel &amp; Associates, we
