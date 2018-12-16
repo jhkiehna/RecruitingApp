@@ -15,12 +15,12 @@ class Candidate extends Model
         'walter_id',
         'first_name',
         'last_name',
-        'email',
-        'phone',
-        'city',
-        'state',
+        'job_title',
         'industry',
         'summary',
+        'city',
+        'state',
+        'email',
     ];
 
     protected $dates = [
@@ -35,12 +35,10 @@ class Candidate extends Model
             'id' => $this->id,
             'walter_id' => $this->walter_id,
             'name' => $this->full_name,
-            'city' => $this->city,
-            'state' => $this->state,
-            'phone' => $this->phone,
-            'email' => $this->email,
             'industry' => $this->industry,
             'summary' => $this->summary,
+            'city' => $this->city,
+            'state' => $this->state,
         ];
     }
 
