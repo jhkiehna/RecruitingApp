@@ -47,11 +47,11 @@ class CandidateController extends Controller
                 'walterID'      => 'numeric|unique:candidates,walter_id|nullable',
                 'firstName'     => 'required|alpha|max:255',
                 'lastName'      => 'required|alpha|max:255',
-                'email'         => 'required|max:255|unique:candidates,email',
-                'phone'         => 'max:20|nullable',
+                'email'         => 'max:255|nullable|unique:candidates,email',
                 'city'          => 'alpha_dash|max:255|nullable',
                 'state'         => 'alpha|max:2|nullable',
-                'industry'      => 'required|max:255|alpha_num',
+                'jobTitle'      => 'max:255|nullable',
+                'industry'      => 'required|max:255',
                 'summary'       => 'required|max:255',
             ],
             [
@@ -66,33 +66,32 @@ class CandidateController extends Controller
                 'lastName.alpha'        => 'Last Name can only contain letters',
                 'lastName.max'          => 'The Last Name you entered is too long',
 
-                'email.required'        => 'Email is required',
                 'email.max'             => 'The Email you entered is too long',
                 'email.unique'           => 'The is already a Candidate in the database with this email address',
 
-                'phone.max'             => 'A phone number cannot be longer than 20 digits',
-
-                'city.alpha_dash'            => 'The city can only contain letters and dashes',
+                'city.alpha_dash'       => 'The city can only contain letters and dashes',
                 'city.max'              => 'The city cannot be longer than 255 characters',
 
                 'state.alpha'           => 'The state can only contain letters',
                 'state.max'             => 'Please use the 2 letter state abbreviation',
 
+                'jobTitle.max'             => 'The job title you entered is too long',
+
                 'industry.required'     => 'An industry must be specified for this candidate',
                 'industry.max'          => 'An industry cannot be longer than 255 characters',
-                'industry.alpha_num'    => 'An industry can only contain letters and numbers',
 
                 'summary.required'      => 'A summary of the candidate is required',
                 'summary.max'           => 'A summary cannot be longer than 255 characters',
             ]
         );
+
         try {
             Candidate::create([
                 'walter_id' => $request->walterID,
                 'first_name' => $request->firstName,
                 'last_name' => $request->lastName,
                 'email' => $request->email,
-                'phone' => $request->phone,
+                'job_title' => $request->jobTitle,
                 'city' => $request->city,
                 'state' => $request->state,
                 'industry' => $request->industry,
@@ -144,11 +143,11 @@ class CandidateController extends Controller
                 'walterID'      => 'numeric|nullable|unique:candidates,walter_id,'. $candidate->id,
                 'firstName'     => 'required|alpha|max:255',
                 'lastName'      => 'required|alpha|max:255',
-                'email'         => 'required|max:255|unique:candidates,email,'. $candidate->id,
-                'phone'         => 'max:20|nullable',
+                'email'         => 'nullable|max:255|unique:candidates,email,'. $candidate->id,
                 'city'          => 'alpha_dash|max:255|nullable',
                 'state'         => 'alpha|max:2|nullable',
-                'industry'      => 'required|max:255|alpha_num',
+                'jobTitle'      => 'max:255|nullable',
+                'industry'      => 'required|max:255',
                 'summary'       => 'required|max:255',
             ],
             [
@@ -163,11 +162,8 @@ class CandidateController extends Controller
                 'lastName.alpha'        => 'Last Name can only contain letters',
                 'lastName.max'          => 'The Last Name you entered is too long',
 
-                'email.required'        => 'Email is required',
                 'email.max'             => 'The Email you entered is too long',
                 'email.unique'          => 'The is already a Candidate in the database with this email address',
-
-                'phone.max'             => 'A phone number cannot be longer than 20 digits',
 
                 'city.alpha_dash'       => 'The city can only contain letters and dashes',
                 'city.max'              => 'The city cannot be longer than 255 characters',
@@ -175,9 +171,10 @@ class CandidateController extends Controller
                 'state.alpha'           => 'The state can only contain letters',
                 'state.max'             => 'Please use the 2 letter state abbreviation',
 
+                'jobTitle.max'             => 'The job title you entered is too long',
+
                 'industry.required'     => 'An industry must be specified for this candidate',
                 'industry.max'          => 'An industry cannot be longer than 255 characters',
-                'industry.alpha_num'    => 'An industry can only contain letters and numbers',
 
                 'summary.required'      => 'A summary of the candidate is required',
                 'summary.max'           => 'A summary cannot be longer than 255 characters',
@@ -189,7 +186,7 @@ class CandidateController extends Controller
                 'first_name' => $request->firstName,
                 'last_name' => $request->lastName,
                 'email' => $request->email,
-                'phone' => $request->phone,
+                'job_title' => $request->jobTitle,
                 'city' => $request->city,
                 'state' => $request->state,
                 'industry' => $request->industry,

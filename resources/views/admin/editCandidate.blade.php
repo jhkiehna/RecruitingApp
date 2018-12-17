@@ -47,25 +47,25 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="email">Email</label>
-                            <input class="form-control {{$errors->has('email') ? 'alert alert-danger' : ''}}" type="email" name="email" id="email" placeholder="..." value="{{old('email') ?? $candidate->email }}">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="phone">Phone Number</label>
-                            <input class="form-control {{$errors->has('phone') ? 'alert alert-danger' : ''}}" type="text" name="phone" id="phone" placeholder="..." value="{{old('phone') ?? $candidate->phone }}">
+                            <label for="email">Email (Optional)</label>
+                            <input class="form-control {{$errors->has('email') ? 'alert alert-danger' : ''}}" type="email" name="email" id="email" placeholder="..." value="{{old('email') ?? $candidate->email}}">
                         </div>
 
                         <div class="form-row">
                             <div class="form-group col">
-                                <label for="city">City</label>
+                                <label for="city">City (Optional)</label>
                                 <input class="form-control {{$errors->has('city') ? 'alert alert-danger' : ''}}" type="text" name="city" id="city" placeholder="..." value="{{old('city') ?? $candidate->city }}">
                             </div>
 
                             <div class="form-group col">
-                                <label for="state">State</label>
+                                <label for="state">State (Optional)</label>
                                 <input class="form-control {{$errors->has('state') ? 'alert alert-danger' : ''}}" type="text" name="state" id="state" placeholder="..." value="{{old('state') ?? $candidate->state }}">
                             </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Job Title</label>
+                            <input class="form-control {{$errors->has('jobTitle') ? 'alert alert-danger' : ''}}" type="text" name="jobTitle" id="jobTitle" placeholder="current or desired position..." value="{{old('jobTitle') ?? $candidate->job_title}}">
                         </div>
 
                         <div class="form-group">

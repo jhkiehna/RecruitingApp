@@ -36,7 +36,7 @@ class Candidate extends Model
             'walter_id' => $this->walter_id,
             'name' => $this->full_name,
             'industry' => $this->industry,
-            'summary' => $this->summary,
+            'summary' => $this->job_title . ' - ' . substr($this->summary, 0, 50) . '...',
             'city' => $this->city,
             'state' => $this->state,
         ];
