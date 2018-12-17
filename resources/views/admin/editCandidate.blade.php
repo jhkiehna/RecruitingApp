@@ -31,7 +31,7 @@
 
                         <div class="form-group">
                             <label for="walterID">Walter ID</label>
-                            <input class="form-control {{$errors->has('walterID') ? 'alert alert-danger' : ''}}" type="text" name="walterID" id="walterID" placeholder="..." value="{{ old('walterId') ?? $candidate->walter_id}}">
+                            <input class="form-control {{$errors->has('walterID') ? 'alert alert-danger' : ''}}" type="text" name="walterID" id="walterID" placeholder="..." value="{{ old('walterID') ?? $candidate->walter_id}}">
                         </div>
 
                         <div class="form-row">

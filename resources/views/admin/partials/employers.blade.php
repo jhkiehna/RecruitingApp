@@ -10,7 +10,6 @@
                 <th>Walter ID</th>
                 <th>Name</th>
                 <th>Company</th>
-                <th>Phone</th>
                 <th>Email</th>
                 <th>Actions</th>
             </tr>
@@ -30,13 +29,13 @@
                 {data: 'walter_id', name: 'walter_id'},
                 {data: 'name', name: 'name'},
                 {data: 'company', name: 'company'},
-                {data: 'phone', name: 'phone'},
                 {data: 'email', name: 'email'},
                 {
                     data: null, 
                     name: 'actions', 
                     render: function (data, type, row) {
-                        return '<button class="btn btn-info btn-sm btn-block font-weight-bold email-employer" data-toggle="modal" data-target="#email-employer-modal" data-employer-id="'+data.id+'">Email '+data.name+'</button>';
+                        return '<button class="btn btn-info btn-sm btn-block font-weight-bold email-employer" data-toggle="modal" data-target="#email-employer-modal" data-employer-id="'+data.id+'">Email <br>'+data.name+'</button>'
+                        +`<a class="btn btn-info btn-sm btn-block edit-employer" href="/dashboard/employers/${data.id}/edit-employer">Edit ${data.name}</a>`;
                     }
                 }
             ]
@@ -55,15 +54,6 @@
                     modal.find('h5#email-employer-modal-title').text('Email ' + response.email)        
                 }
             });
-
-            
-            
-
-            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-            // var modal = $(this)
-            
-            
         });
     });
 </script>

@@ -41,7 +41,9 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
         Route::get('/', 'EmployerController@index')->name('index.employers');
         Route::get('/create-employer', 'EmployerController@create')->name('create.employer');
         Route::post('/', 'EmployerController@store')->name('store.employer');
-        Route::get('/show-employer/{id}', 'EmployerController@show')->name('show.employer');
+        Route::get('{employerId}/edit-employer', 'EmployerController@edit')->name('edit.employer');
+        Route::post('{employerId}/update-employer', 'EmployerController@update')->name('update.employer');
+        Route::post('{employerId}/delete-employer', 'EmployerController@destroy')->name('delete.employer');
     });
 
     Route::post('/sendClientNotification/{employerId}', 'NotifyClientController@send')->name('email.client');
