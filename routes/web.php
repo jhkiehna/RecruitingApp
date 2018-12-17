@@ -44,6 +44,8 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
         Route::get('{employerId}/edit-employer', 'EmployerController@edit')->name('edit.employer');
         Route::post('{employerId}/update-employer', 'EmployerController@update')->name('update.employer');
         Route::post('{employerId}/delete-employer', 'EmployerController@destroy')->name('delete.employer');
+
+        Route::get('/{employerId}', 'EmployerController@show')->name('show.employer');
     });
 
     Route::post('/sendClientNotification/{employerId}', 'NotifyClientController@send')->name('email.client');

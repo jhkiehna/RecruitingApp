@@ -16,9 +16,6 @@
                 <th>Action</th>
             </tr>
         </thead>
-
-        <tbody>
-        </tbody>
     </table>
 </div>
 
@@ -28,7 +25,6 @@
         
         $('#candidatesTable').DataTable({
             processing: true,
-            serverSide: true,
             ajax: "{{ route('index.candidates') }}",
             columns: [
                 {data: 'walter_id', name: 'walter_id'},
@@ -39,7 +35,8 @@
                 {data: 'state', name: 'state'},
                 {
                     data: null, 
-                    name: 'actions', 
+                    name: 'action',
+                    orderable: false,
                     render: function (data, type, row) {
                         return `<a class="btn btn-info btn-sm btn-block" href="/dashboard/candidates/${data.id}/edit-candidate">Edit ${data.name}</a>`;
                     }

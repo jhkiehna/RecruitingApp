@@ -94,7 +94,7 @@ class EmployerController extends Controller
     {
         $employer = Employer::find($employerId);
 
-        return json_encode($employer);
+        return $employer;
     }
 
     /**

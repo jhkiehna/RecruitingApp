@@ -1,23 +1,63 @@
 <div class="modal" tabindex="-1" role="dialog" id="email-employer-modal">
-  <input type="hidden" id="employer-id-hidden-field">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="email-employer-modal-title">Email Employer</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Modal body text goes here.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Send Email</button>
-      </div>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="email-employer-modal-title">Email Employer</h5>
+                
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <p>Select all the candidates you wish to inform this employer of.<br>
+                    <span class="keyboard-key">⇧ Shift</span>+Click to select multiple rows.<br>
+                    <span class="keyboard-key">Ctrl</span>+Click (Windows) or <span class="keyboard-key">⌘</span>+Click (Mac) to select additional rows.
+                </p>
+
+                <table id="candidatesTableModal" class="display compact" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Walter ID</th>
+                            <th>Name</th>
+                            <th>Industry</th>
+                            <th>Select</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Send Email</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
-@section('employerScripts')
+@section('emailModalScripts')
+<script defer>
+    $(document).ready(function () {
+        
+        $('#candidatesTableModal').DataTable({
+            processing: true,
+            ajax: "{{ route('index.candidates') }}",
+            columns: [
+                {data: 'walter_id', name: 'walter_id'},
+                {data: 'name', name: 'name'},
+                {data: 'industry', name: 'industry'},
+                {data: null, name: 'select'}
+            ],
+            select: {
+                style:    'os',
+            },
+            columnDefs: [ {
+                orderable: false,
+                className: 'select-checkbox',
+                targets:   3,
+                defaultContent: '',
+            } ],
+        });
+    });
+</script>
 @endsection

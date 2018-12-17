@@ -10480,3 +10480,10 @@ a.text-dark:focus {
   margin-top: 1px !important;
 }
 
+.keyboard-key {
+  border: 1px solid gray;
+  border-radius: 2px;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
