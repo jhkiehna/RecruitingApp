@@ -4,7 +4,7 @@
     <tbody>
         <tr>
             <td valign="center" style="color: #505050; font-family: Helvetica, sans-serif; font-size: 16px; line-height: 150%; text-align: left; padding: 12px 20px;">
-                {{ $first_name }} {{ $last_name }},
+                {{ $employer->first_name }} {{ $employer->last_name }},
                 <br>
                 <span style="font-size:12px;">{{ date("F j, Y") }}</span>
             </td>
@@ -12,7 +12,7 @@
         <tr>
             <td valign="center" style="color: #505050; font-family: Helvetica, sans-serif; font-size: 16px; line-height: 150%; text-align: left; padding: 12px 20px;">
                 <h1 style="color: #505050; font-family: 'Trebuchet MS', Verdana, Arial, sans-serif; font-size: 18px; line-height: 110%; text-align: left; font-weight: bold;">
-                    Top {{ $industry }} Candidates on the Market
+                    Top {{ $candidates[0]->industry }} Candidates on the Market
                 </h1>
                 <p style="color: #505050; font-family: 'Trebuchet MS', Verdana, Arial, sans-serif; font-size: 12px; line-height: 110%; text-align: left;">
                     At Kimmel &amp; Associates, we
@@ -44,8 +44,8 @@
                 <!--Hotsheet Below-->
                 @foreach($candidates as $candidate)
                     <p style="color: #505050; font-family: 'Trebuchet MS', Verdana, Arial, sans-serif; font-size: 12px; line-height: 110%; text-align: left;">
-                        <a style="color: #e87600;" href="{{$emailLink}}?Subject=Candidate-{{$candidate->walterId}}"><strong>
-                            {{ $candidate->walterId }} – {{ $candidate->jobTitle }}
+                        <a style="color: #e87600;" href="{{$emailLink}}?Subject=Candidate-{{$candidate->walter_id}}"><strong>
+                            {{ $candidate->walter_id }} – {{ $candidate->job_title }}
                         </strong></a>
                         – {{ $candidate->summary }}
 

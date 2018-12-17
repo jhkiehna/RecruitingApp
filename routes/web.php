@@ -48,6 +48,6 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
         Route::get('/{employerId}', 'EmployerController@show')->name('show.employer');
     });
 
-    Route::post('/sendClientNotification/{employerId}', 'NotifyClientController@send')->name('email.client');
-    Route::post('/sendCandidateNotification/{candidateId}', 'NotifyClientController@send')->name('email.candidate');
+    Route::post('/emailEmployer/{employerId}', 'EmployerEmailController@send')->name('email.employer');
+    Route::post('/previewEmailEmployer/{employerId}', 'EmployerEmailController@preview')->name('previewEmail.employer');
 });

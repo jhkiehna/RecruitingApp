@@ -29,8 +29,10 @@
             
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-info">Preview Email</button>
-                <button type="button" class="btn btn-success">Send Email</button>
+                <button type="button" class="btn btn-info" id="emailPreviewButton">Preview Email</button>
+                <button type="button" class="btn btn-success" id="emailSendButton">Send Email</button>
+                <form action="" method="POST" autocomplete="off" id="emailPreviewForm">@csrf</form>
+                <form></form>
             </div>
         </div>
     </div>
@@ -44,7 +46,14 @@
             processing: true,
             ajax: "{{ route('index.candidates') }}",
             columns: [
-                {data: 'walter_id', name: 'walter_id'},
+                {
+                    data: null, 
+                    name: 'actions',
+                    orderable: false,
+                    render: function (data, type, row) {
+                        return '<span>'+data.walter_id+'</span><input type="hidden" id="candidateID" name="'+data.id+'" value="'+data.id+'">';
+                    }
+                },
                 {data: 'name', name: 'name'},
                 {data: 'industry', name: 'industry'},
                 {data: null, name: 'select'}

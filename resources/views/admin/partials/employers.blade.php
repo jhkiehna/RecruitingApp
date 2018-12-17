@@ -49,8 +49,24 @@
                 url: `dashboard/employers/${empId}`,
                 async: true,
                 success: function(response) {
-                    console.log(response);
                     modal.find('h5#email-employer-modal-title').text('Email ' + response.email);
+                    
+                    $("#emailPreviewButton").click(function() {
+                        var action = `dashboard/previewEmailEmployer/${empId}`;
+                        modal.find("#emailPreviewForm").attr('action', action);
+
+                        var inputs = $("#candidatesTableModal tr.selected td input");
+                        inputs.each(function() {
+                            $(this).appendTo(modal.find("#emailPreviewForm"));
+                        });
+
+                        if (inputs.length > 0){
+                            modal.find("#emailPreviewForm").submit();
+                        }
+                        else {
+                            console.log("nothing selected");
+                        }
+                    });
                 }
             });
             
