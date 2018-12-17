@@ -44,14 +44,13 @@ class EmployerController extends Controller
     {
         $request->validate(
             [
-                'walterID' => 'numeric|unique:employers,walter_id|nullable',
+                'walterID' => 'numeric|nullable',
                 'firstName' => 'required|alpha|max:255',
                 'lastName' => 'required|alpha|max:255',
                 'company' => 'required|max:255',
                 'email' => 'required|max:255|unique:employers,email',
             ],
             [
-                'walterID.unique' => 'There is already a candidate in the database with this Walter ID',
                 'walterID.numeric' => 'A Walter Id can only contain numbers',
 
                 'firstName.required' => 'First Name is required',
@@ -123,14 +122,13 @@ class EmployerController extends Controller
         $employer = Employer::findOrFail($employerId);
         $request->validate(
             [
-                'walterID' => 'numeric|nullable|unique:employers,walter_id,'. $employer->id,
+                'walterID' => 'numeric|nullable',
                 'firstName' => 'required|alpha|max:255',
                 'lastName' => 'required|alpha|max:255',
                 'company' => 'required|max:255',
                 'email' => 'required|max:255|unique:employers,email,'. $employer->id,
             ],
             [
-                'walterID.unique' => 'There is already a candidate in the database with this Walter ID',
                 'walterID.numeric' => 'A Walter Id can only contain numbers',
 
                 'firstName.required' => 'First Name is required',

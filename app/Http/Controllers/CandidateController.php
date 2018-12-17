@@ -44,7 +44,7 @@ class CandidateController extends Controller
     {
         $request->validate(
             [
-                'walterID'      => 'numeric|unique:candidates,walter_id|nullable',
+                'walterID'      => 'numeric|nullable',
                 'firstName'     => 'required|alpha|max:255',
                 'lastName'      => 'required|alpha|max:255',
                 'email'         => 'max:255|nullable|unique:candidates,email',
@@ -52,10 +52,9 @@ class CandidateController extends Controller
                 'state'         => 'alpha|max:2|nullable',
                 'jobTitle'      => 'max:255|nullable',
                 'industry'      => 'required|max:255',
-                'summary'       => 'required|max:255',
+                'summary'       => 'required|max:500',
             ],
             [
-                'walterID.unique'       => 'There is already a candidate in the database with this Walter ID',
                 'walterID.numeric'      => 'A Walter Id can only contain numbers',
 
                 'firstName.required'    => 'First Name is required',
@@ -81,7 +80,7 @@ class CandidateController extends Controller
                 'industry.max'          => 'An industry cannot be longer than 255 characters',
 
                 'summary.required'      => 'A summary of the candidate is required',
-                'summary.max'           => 'A summary cannot be longer than 255 characters',
+                'summary.max'           => 'A summary cannot be longer than 500 characters',
             ]
         );
 
@@ -140,7 +139,7 @@ class CandidateController extends Controller
         $candidate = Candidate::findOrFail($candidateId);
         $request->validate(
             [
-                'walterID'      => 'numeric|nullable|unique:candidates,walter_id,'. $candidate->id,
+                'walterID'      => 'numeric|nullable',
                 'firstName'     => 'required|alpha|max:255',
                 'lastName'      => 'required|alpha|max:255',
                 'email'         => 'nullable|max:255|unique:candidates,email,'. $candidate->id,
@@ -148,10 +147,9 @@ class CandidateController extends Controller
                 'state'         => 'alpha|max:2|nullable',
                 'jobTitle'      => 'max:255|nullable',
                 'industry'      => 'required|max:255',
-                'summary'       => 'required|max:255',
+                'summary'       => 'required|max:500',
             ],
             [
-                'walterID.unique'       => 'There is already a candidate in the database with this Walter ID',
                 'walterID.numeric'      => 'A Walter Id can only contain numbers',
 
                 'firstName.required'    => 'First Name is required',
@@ -177,7 +175,7 @@ class CandidateController extends Controller
                 'industry.max'          => 'An industry cannot be longer than 255 characters',
 
                 'summary.required'      => 'A summary of the candidate is required',
-                'summary.max'           => 'A summary cannot be longer than 255 characters',
+                'summary.max'           => 'A summary cannot be longer than 500 characters',
             ]
         );
         try {

@@ -60,10 +60,10 @@
                             <input class="form-control {{$errors->has('email') ? 'alert alert-danger' : ''}}" type="email" name="email" id="email" placeholder="..." value="{{old('email') ?? $employer->email}}">
                         </div>
                         
-                        <button type="submit" class="btn btn-primary">Update {{ $employer->full_name }}</button>
+                        <button type="submit" class="btn btn-primary btn-block">Update {{ $employer->full_name }}</button>
                     </form>
                     <br>
-                    <form id="#deleteEmployerForm" action="{{ route('delete.employer', ['id' => $employer->id]) }}" method="POST">
+                    <form id="deleteEmployerForm" action="{{ route('delete.employer', ['id' => $employer->id]) }}" method="POST">
                         @csrf
 
                         <p class="alert alert-danger" id="deleteWarning" hidden></p>
@@ -74,4 +74,23 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('employerScripts')
+<script defer>
+    $(document).ready(function () {
+        $("#deleteEmployerButton").click(function(e) {
+            e.preventDefault();
+
+            $("#deleteWarning").removeAttr("hidden").text("Are you sure you want to delete {{ $employer->full_name }}? Press the button again to confirm.");
+            $("#deleteEmployerButton").text("Really Delete {{ $employer->full_name }}?");
+            
+            $("#deleteEmployerButton").unbind();
+
+            $("#deleteEmployerButton").click(function() {
+                $("#deleteEmployerForm").submit();
+            });
+        })
+    });
+</script>
 @endsection

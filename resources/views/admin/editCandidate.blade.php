@@ -81,11 +81,11 @@
                         <button type="submit" class="btn btn-primary btn-block">Update {{ $candidate->full_name }}</button>
                     </form>
                     <br>
-                    <form id="#deleteCandidateForm" action="{{ route('delete.candidate', ['id' => $candidate->id]) }}" method="POST">
+                    <form id="deleteCandidateForm" action="{{ route('delete.candidate', ['id' => $candidate->id]) }}" method="POST">
                         @csrf
 
                         <p class="alert alert-danger" id="deleteWarning" hidden></p>
-                        <button type="button" id="deleteCandidateButton" class="btn btn-primary btn-sm float-right">Delete {{ $candidate->full_name }}</button>
+                        <button type="submit" id="deleteCandidateButton" class="btn btn-primary btn-sm float-right">Delete {{ $candidate->full_name }}</button>
                     </form>
                 </div>
             </div>
@@ -97,19 +97,18 @@
 @section('candidateScripts')
 <script defer>
     $(document).ready(function () {
-        console.log("script running");
+        $("#deleteCandidateButton").click(function(e) {
+            e.preventDefault();
 
-        var deleteForm = $("#deleteCandidateForm");
-        
-        $("#deleteCandidateButton").click(function() {
             $("#deleteWarning").removeAttr("hidden").text("Are you sure you want to delete {{ $candidate->full_name }}? Press the button again to confirm.");
             $("#deleteCandidateButton").text("Really Delete {{ $candidate->full_name }}?");
+            
+            $("#deleteCandidateButton").unbind();
 
             $("#deleteCandidateButton").click(function() {
-                console.log("click");
-                deleteForm.submit();
+                $("#deleteCandidateForm").submit();
             });
-        });
+        })
     });
 </script>
 @endsection

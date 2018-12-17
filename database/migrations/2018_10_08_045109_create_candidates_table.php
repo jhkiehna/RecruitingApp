@@ -20,7 +20,7 @@ class CreateCandidatesTable extends Migration
             $table->string('last_name');
             $table->string('job_title');
             $table->string('industry');
-            $table->string('summary');
+            $table->text('summary');
             $table->string('city')->nullable();
             $table->string('state')->nullable();
             $table->string('email')->nullable();
