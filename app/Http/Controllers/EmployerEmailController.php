@@ -20,7 +20,11 @@ class EmployerEmailController extends Controller
             return Candidate::findOrFail($value);
         })->values();
 
-        Mail::to($employer->email)->send(new NotifyClient($candidates, $employer, $this->setIndustry($candidates)));
+        Mail::to($employer->email)
+        ->bcc(config('mail.from.address'))
+        ->send(new NotifyClient($candidates, $employer));
+
+        return redirect()->route('dashboard')->withStatus('Email sent to ' . $employer->email);
     }
 
     public function preview(Request $request, $employerId)
@@ -32,30 +36,6 @@ class EmployerEmailController extends Controller
             return Candidate::findOrFail($value);
         })->values();
 
-        return view('email.html.clientHotsheet')->with([
-            'candidates' => $candidates,
-            'employer' => $employer,
-            'contactLink' => 'testlink@test.com',
-            'emailLink' => 'testlink@test.com',
-            'industry' => $this->setIndustry($candidates)
-        ]);
-    }
-
-    //This shouldn't be here. Create Transformer later
-    private function setIndustry($candidates)
-    {
-        $industries = $candidates->map(function($candidate){
-            return $candidate->industry;
-        })->unique();
-
-        if ($industries->count() > 2) {
-            return '';
-        }
-
-        if ($industries->count() > 1) {
-            return $industries[0] . ' and ' . $industries[1];
-        }
-        
-        return $industries->first();
+        return (new NotifyClient($candidates, $employer))->preview();
     }
 }

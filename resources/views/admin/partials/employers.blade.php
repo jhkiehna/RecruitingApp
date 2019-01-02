@@ -74,7 +74,7 @@
 
                         var inputs = $("#candidatesTableModal tr.selected td input");
                         inputs.each(function() {
-                            $(this).appendTo(modal.find("#emailPreviewForm"));
+                            $(this).appendTo(modal.find("#emailEmployerForm"));
                         });
 
                         if (inputs.length > 0){

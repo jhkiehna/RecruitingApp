@@ -41,6 +41,7 @@
 </tr>
 </tbody>
 </table>
-<img width="1px" height="1px" alt="" src="http://email.email.kimmel.com/o/eJwNy0EOAiEMAMDXyHEDpQV64DGFlpUomuxu9Ps699Ga1FiLmzUWshDGKIQeaTTJjUAUolLkPPCG_vzOcW27veyQy9Tda2odQHPyEIgze1MPVjBBZy7JojtqO-Uju_37Y65lz62_1w8PfiNp"/>
+<!--Not sure what this is, Looks like a tracking pixel-->
+<!--<img width="1px" height="1px" alt="" src="http://email.email.kimmel.com/o/eJwNy0EOAiEMAMDXyHEDpQV64DGFlpUomuxu9Ps699Ga1FiLmzUWshDGKIQeaTTJjUAUolLkPPCG_vzOcW27veyQy9Tda2odQHPyEIgze1MPVjBBZy7JojtqO-Uju_37Y65lz62_1w8PfiNp"/>-->
 </body>
 </html>

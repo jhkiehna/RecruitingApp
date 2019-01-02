@@ -15,7 +15,6 @@ class NotifyClient extends Mailable
 
     protected $candidates;
     protected $employer;
-    protected $industry;
     protected $fromAddress;
     protected $fromName;
 
@@ -24,11 +23,10 @@ class NotifyClient extends Mailable
      *
      * @return void
      */
-    public function __construct($candidates, Employer $employer, $industry)
+    public function __construct($candidates, Employer $employer)
     {
         $this->candidates = $candidates;
         $this->employer = $employer;
-        $this->industry = $industry;
 
         $this->fromAddress = config('mail.from.address');
         $this->fromName = config('mail.from.name');
@@ -49,7 +47,35 @@ class NotifyClient extends Mailable
                 'employer' => $this->employer,
                 'contactLink' => $this->fromAddress,
                 'emailLink' => $this->fromAddress,
-                'industry' => $this->industry
+                'industry' => $this->setIndustry()
             ]);
+    }
+
+    public function preview()
+    {
+        return view('email.html.clientHotsheet')->with([
+            'candidates' => $this->candidates,
+            'employer' => $this->employer,
+            'contactLink' => 'testlink@test.com',
+            'emailLink' => 'testlink@test.com',
+            'industry' => $this->setIndustry()
+        ]);
+    }
+
+    private function setIndustry()
+    {
+        $industries = $this->candidates->map(function($candidate){
+            return $candidate->industry;
+        })->unique();
+
+        if ($industries->count() > 2) {
+            return '';
+        }
+
+        if ($industries->count() > 1) {
+            return $industries[0] . ' and ' . $industries[1];
+        }
+        
+        return $industries->first();
     }
 }
