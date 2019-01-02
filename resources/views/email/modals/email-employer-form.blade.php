@@ -32,7 +32,7 @@
                 <button type="button" class="btn btn-info" id="emailPreviewButton">Preview Email</button>
                 <button type="button" class="btn btn-success" id="emailSendButton">Send Email</button>
                 <form action="" method="POST" autocomplete="off" id="emailPreviewForm">@csrf</form>
-                <form></form>
+                <form action="" method="POST" autocomplete="off" id="emailEmployerForm">@csrf</form>
             </div>
         </div>
     </div>

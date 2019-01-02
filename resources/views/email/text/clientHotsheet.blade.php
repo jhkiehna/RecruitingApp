@@ -1,5 +1,5 @@
 
-{{ $first_name }} {{ $last_name }},
+{{ $employer->first_name }} {{ $employer->first_name }},
 
 Top {{ $industry }} Candidates on the Market
 
