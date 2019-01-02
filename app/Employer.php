@@ -36,15 +36,6 @@ class Employer extends Model
         ];
     }
 
-    public function mailTransform()
-    {
-        return [
-            'name' => $this->full_name,
-            'company' => $this->company,
-            'email' => $this->email
-        ];
-    }
-
     public function getWalterIdAttribute($walter_id)
     {
         return $walter_id ?? 'No ID';

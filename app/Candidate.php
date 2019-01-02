@@ -49,13 +49,6 @@ class Candidate extends Model
         ];
     }
 
-    public function mailTransform()
-    {
-        return [
-            'testField' => 'test test'
-        ];
-    }
-
     public function getWalterIdAttribute($walter_id)
     {
         return $walter_id ?? 'No ID';
