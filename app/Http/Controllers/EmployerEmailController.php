@@ -21,7 +21,7 @@ class EmployerEmailController extends Controller
         })->values();
 
         Mail::to($employer->email)
-        // ->bcc(config('mail.from.address'))
+        ->bcc(config('mail.from.address'))
         ->send(new NotifyClient($candidates, $employer));
 
         return redirect()->route('dashboard')->withStatus('Email sent to ' . $employer->email . ' - Blind Carbon Copy sent to ' . config('mail.from.address'));

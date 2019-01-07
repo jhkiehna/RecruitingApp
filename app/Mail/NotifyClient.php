@@ -46,8 +46,7 @@ class NotifyClient extends Mailable
             ->with([
                 'candidates' => $this->candidates,
                 'employer' => $this->employer,
-                'contactLink' => $this->fromAddress,
-                'emailLink' => $this->fromAddress,
+                'contactLink' => 'mailto:' . $this->fromAddress,
                 'industry' => $this->setIndustry()
             ]);
     }
@@ -57,8 +56,7 @@ class NotifyClient extends Mailable
         return view('email.html.clientHotsheet')->with([
             'candidates' => $this->candidates,
             'employer' => $this->employer,
-            'contactLink' => 'testlink@test.com',
-            'emailLink' => 'testlink@test.com',
+            'contactLink' => 'mailto:testlink@test.com',
             'industry' => $this->setIndustry()
         ]);
     }

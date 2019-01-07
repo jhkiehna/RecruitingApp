@@ -48,7 +48,7 @@ class CandidateController extends Controller
                 'firstName'     => 'required|alpha|max:255',
                 'lastName'      => 'required|alpha|max:255',
                 'email'         => 'max:255|nullable|unique:candidates,email',
-                'city'          => 'alpha_dash|max:255|nullable',
+                'city'          => 'max:255|nullable',
                 'state'         => 'alpha|max:2|nullable',
                 'jobTitle'      => 'max:255|nullable',
                 'industry'      => 'required|max:255',
@@ -68,7 +68,6 @@ class CandidateController extends Controller
                 'email.max'             => 'The Email you entered is too long',
                 'email.unique'           => 'The is already a Candidate in the database with this email address',
 
-                'city.alpha_dash'       => 'The city can only contain letters and dashes',
                 'city.max'              => 'The city cannot be longer than 255 characters',
 
                 'state.alpha'           => 'The state can only contain letters',
@@ -143,7 +142,7 @@ class CandidateController extends Controller
                 'firstName'     => 'required|alpha|max:255',
                 'lastName'      => 'required|alpha|max:255',
                 'email'         => 'nullable|max:255|unique:candidates,email,'. $candidate->id,
-                'city'          => 'alpha_dash|max:255|nullable',
+                'city'          => 'max:255|nullable',
                 'state'         => 'alpha|max:2|nullable',
                 'jobTitle'      => 'max:255|nullable',
                 'industry'      => 'required|max:255',
@@ -163,7 +162,6 @@ class CandidateController extends Controller
                 'email.max'             => 'The Email you entered is too long',
                 'email.unique'          => 'The is already a Candidate in the database with this email address',
 
-                'city.alpha_dash'       => 'The city can only contain letters and dashes',
                 'city.max'              => 'The city cannot be longer than 255 characters',
 
                 'state.alpha'           => 'The state can only contain letters',

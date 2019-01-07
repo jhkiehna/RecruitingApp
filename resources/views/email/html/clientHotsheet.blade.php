@@ -44,14 +44,16 @@
                 <!--Hotsheet Below-->
                 @foreach($candidates as $candidate)
                     <p style="color: #505050; font-family: 'Trebuchet MS', Verdana, Arial, sans-serif; font-size: 12px; line-height: 110%; text-align: left;">
-                        <a style="color: #e87600;" href="{{$emailLink}}?Subject=Candidate-{{$candidate->walter_id}}"><strong>
-                            {{ $candidate->walter_id }} – {{ $candidate->job_title }}
+                        <a style="color: #e87600;" href="{{$contactLink}}?subject=Candidate-{{$candidate->walter_id}}"><strong>
+                            {{ $candidate->walter_id }} – {{ $candidate->job_title }} (
+                                @if(!empty($candidate->city) && !empty($candidate->state))
+                                    {{ $candidate->city }}, {{ $candidate->state }}
+                                @elseif(!empty($candidate->state))
+                                    {{$candidate->state}}
+                                @endif
+                            )
                         </strong></a>
                         – {{ $candidate->summary }}
-
-                        @if(!empty($candidate->city) && !empty($candidate->state))
-                            Located in {{ $candidate->city }}, {{ $candidate->state }}
-                        @endif
                     </p>
                 @endforeach
                 <!--Hotsheet End-->
@@ -91,29 +93,6 @@
                     <strong>No one benefits in the long run…</strong>
                     <a style="color: #e87600;" href="https://kimmel.com/candidates/offering-and-accepting-counteroffers-its-a-mistake.html?utm_source=ConNews918&amp;utm_medium=email&amp;utm_term=construction&amp;utm_content=hotsheet&amp;utm_campaign=ConNews918">
                         Here’s Why
-                    </a>
-                </p>
-                <p style="color: #505050; font-family: 'Trebuchet MS', Verdana, Arial, sans-serif; font-size: 12px; line-height: 110%; text-align: center;">
-                    <a style="color: #e87600;" href="https://kimmel.com/candidates/offering-and-accepting-counteroffers-its-a-mistake.html?utm_source=ConNews918&amp;utm_medium=email&amp;utm_term=construction&amp;utm_content=hotsheet&amp;utm_campaign=ConNews918">
-                        <img style="width: 100%;" src="https://media.kimmel.com/assets/img/uploads/offering-and-accepting-counteroffers-its-a-mistake/newsletter.jpg" alt=""/>
-                    </a>
-                </p>
-                <h2 style="color: #505050; font-family: 'Trebuchet MS', Verdana, Arial, sans-serif; font-size: 15px; line-height: 110%; text-align: left; font-weight: bold; text-decoration: underline;">
-                    Latest Kimmel Blog Posts:
-                </h2>
-                <p style="color: #505050; font-family: 'Trebuchet MS', Verdana, Arial, sans-serif; font-size: 12px; line-height: 110%; text-align: left;">
-                    <a style="color: #e87600;" href="https://kimmel.com/employers/attraction-is-key-in-a-candidate-short-market.html?utm_source=ConNews918&amp;utm_medium=email&amp;utm_term=construction&amp;utm_content=hotsheet&amp;utm_campaign=ConNews918">
-                        Attraction is Key in a Candidate-Short Market
-                    </a>
-                </p>
-                <p style="color: #505050; font-family: 'Trebuchet MS', Verdana, Arial, sans-serif; font-size: 12px; line-height: 110%; text-align: left;">
-                    <a style="color: #e87600;" href="https://kimmel.com/employers/overcoming-a-short-stint-on-a-resume.html?utm_source=ConNews918&amp;utm_medium=email&amp;utm_term=construction&amp;utm_content=hotsheet&amp;utm_campaign=ConNews918">
-                        Overcoming a Short Stint on a Resume
-                    </a>
-                </p>
-                <p style="color: #505050; font-family: 'Trebuchet MS', Verdana, Arial, sans-serif; font-size: 12px; line-height: 110%; text-align: left;">
-                    <a style="color: #e87600;" href="https://kimmel.com/candidates/a-strong-first-week-in-a-new-job-can-set-a-strong-foundation.html?sutm_source=AutoNews1017&amp;utm_medium=email&amp;utm_term=automotive&amp;utm_content=hotsheet&amp;utm_campaign=AutoNews1017">
-                        A Strong First Week in a New Job Can Set a Strong Foundation
                     </a>
                 </p>
             </td>
