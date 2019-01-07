@@ -11,7 +11,7 @@ Below, please find an introduction to a few candidates with whom we are currentl
 Please contact us for additional information on any of these candidates or if we can serve you in finding the right candidate for your specific needs.
 
 @foreach($candidates as $candidate)
-    {{ $candidate->walterId }} – {{ $candidate->jobTitle }}
+    {{ $candidate->walter_id }} – {{ $candidate->job_title }}
     – {{ $candidate->summary }}
 
     @if(!empty($candidate->city) && !empty($candidate->state))
