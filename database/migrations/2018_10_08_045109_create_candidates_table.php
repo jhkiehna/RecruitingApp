@@ -18,8 +18,12 @@ class CreateCandidatesTable extends Migration
             $table->string('walter_id')->nullable();
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('email');
-            $table->string('phone')->nullable();
+            $table->string('job_title');
+            $table->string('industry');
+            $table->text('summary');
+            $table->string('city')->nullable();
+            $table->string('state')->nullable();
+            $table->string('email')->nullable();
             
             $table->timestamps();
             $table->softDeletes();

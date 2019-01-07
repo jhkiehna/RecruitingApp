@@ -15,8 +15,12 @@ class Candidate extends Model
         'walter_id',
         'first_name',
         'last_name',
+        'job_title',
+        'industry',
+        'summary',
+        'city',
+        'state',
         'email',
-        'phone',
     ];
 
     protected $dates = [
@@ -25,13 +29,23 @@ class Candidate extends Model
         'deleted_at',
     ];
 
-    public function transformer()
+    public function transform()
     {
+        if (strlen($this->summary) >= 50) {
+            $summary = substr($this->summary, 0, 50) . '...';
+        }
+        else {
+            $summary = $this->summary;
+        }
+
         return [
+            'id' => $this->id,
             'walter_id' => $this->walter_id,
             'name' => $this->full_name,
-            'phone' => $this->phone,
-            'email' => $this->email
+            'industry' => $this->industry,
+            'summary' => $this->job_title . ' - ' . $summary,
+            'city' => $this->city,
+            'state' => $this->state,
         ];
     }
 
@@ -43,5 +57,10 @@ class Candidate extends Model
     public function getFullNameAttribute()
     {
         return $this->first_name .' '. $this->last_name;
+    }
+
+    public function setStateAttribute($value)
+    {
+        $this->attributes['state'] = strtoupper($value);
     }
 }

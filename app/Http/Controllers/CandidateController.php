@@ -18,7 +18,7 @@ class CandidateController extends Controller
         $candidates = Candidate::all();
 
         $transformedCandidates = $candidates->map(function ($candidate) {
-            return $candidate->transformer();
+            return $candidate->transform();
         });
         
         return DataTables::of($transformedCandidates)->make(true);
@@ -44,38 +44,56 @@ class CandidateController extends Controller
     {
         $request->validate(
             [
-                'walterID' => 'numeric|unique:candidates,walter_id|nullable',
-                'firstName' => 'required|alpha|max:255',
-                'lastName' => 'required|alpha|max:255',
-                'email' => 'required|max:255|unique:users,email',
-                'phone' => 'max:20|nullable',
+                'walterID'      => 'numeric|nullable',
+                'firstName'     => 'required|alpha|max:255',
+                'lastName'      => 'required|alpha|max:255',
+                'email'         => 'max:255|nullable|unique:candidates,email',
+                'city'          => 'max:255|nullable',
+                'state'         => 'alpha|max:2|nullable',
+                'jobTitle'      => 'max:255|nullable',
+                'industry'      => 'required|max:255',
+                'summary'       => 'required|max:500',
             ],
             [
-                'walterID.unique' => 'There is already a candidate in the database with this Walter ID',
-                'walterID.numeric' => 'A Walter Id can only contain numbers',
+                'walterID.numeric'      => 'A Walter Id can only contain numbers',
 
-                'firstName.required' => 'First Name is required',
-                'firstName.alpha' => 'First Name can only contain letters',
-                'firstName.max' => 'The First Name you entered is too long',
+                'firstName.required'    => 'First Name is required',
+                'firstName.alpha'       => 'First Name can only contain letters',
+                'firstName.max'         => 'The First Name you entered is too long',
 
-                'lastName.required' => 'Last Name is required',
-                'lastName.alpha' => 'Last Name can only contain letters',
-                'lastName.max' => 'The Last Name you entered is too long',
+                'lastName.required'     => 'Last Name is required',
+                'lastName.alpha'        => 'Last Name can only contain letters',
+                'lastName.max'          => 'The Last Name you entered is too long',
 
-                'email.required' => 'Email is required',
-                'email.max' => 'The Email you entered is too long',
-                'email.uniue' => 'The is already a Candidate in the database with this Email',
+                'email.max'             => 'The Email you entered is too long',
+                'email.unique'           => 'The is already a Candidate in the database with this email address',
 
-                'phone.max' => 'A phone number cannot be longer than 20 digits',
+                'city.max'              => 'The city cannot be longer than 255 characters',
+
+                'state.alpha'           => 'The state can only contain letters',
+                'state.max'             => 'Please use the 2 letter state abbreviation',
+
+                'jobTitle.max'             => 'The job title you entered is too long',
+
+                'industry.required'     => 'An industry must be specified for this candidate',
+                'industry.max'          => 'An industry cannot be longer than 255 characters',
+
+                'summary.required'      => 'A summary of the candidate is required',
+                'summary.max'           => 'A summary cannot be longer than 500 characters',
             ]
         );
+
         try {
             Candidate::create([
                 'walter_id' => $request->walterID,
                 'first_name' => $request->firstName,
                 'last_name' => $request->lastName,
                 'email' => $request->email,
-                'phone' => $request->phone,
+                'job_title' => $request->jobTitle,
+                'city' => $request->city,
+                'state' => $request->state,
+                'industry' => $request->industry,
+                'summary' => $request->summary,
             ]);
         } catch (Exception $e) {
             return $this->response($e->getMessage(), 500);
@@ -101,9 +119,11 @@ class CandidateController extends Controller
      * @param  \App\Candidate  $candidate
      * @return \Illuminate\Http\Response
      */
-    public function edit(Candidate $candidate)
+    public function edit($candidateId)
     {
-        //
+        $candidate = Candidate::findOrFail($candidateId);
+        
+        return view('admin/editCandidate')->with(['candidate' => $candidate]);
     }
 
     /**
@@ -113,9 +133,66 @@ class CandidateController extends Controller
      * @param  \App\Candidate  $candidate
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Candidate $candidate)
+    public function update(Request $request, $candidateId)
     {
-        //
+        $candidate = Candidate::findOrFail($candidateId);
+        $request->validate(
+            [
+                'walterID'      => 'numeric|nullable',
+                'firstName'     => 'required|alpha|max:255',
+                'lastName'      => 'required|alpha|max:255',
+                'email'         => 'nullable|max:255|unique:candidates,email,'. $candidate->id,
+                'city'          => 'max:255|nullable',
+                'state'         => 'alpha|max:2|nullable',
+                'jobTitle'      => 'max:255|nullable',
+                'industry'      => 'required|max:255',
+                'summary'       => 'required|max:500',
+            ],
+            [
+                'walterID.numeric'      => 'A Walter Id can only contain numbers',
+
+                'firstName.required'    => 'First Name is required',
+                'firstName.alpha'       => 'First Name can only contain letters',
+                'firstName.max'         => 'The First Name you entered is too long',
+
+                'lastName.required'     => 'Last Name is required',
+                'lastName.alpha'        => 'Last Name can only contain letters',
+                'lastName.max'          => 'The Last Name you entered is too long',
+
+                'email.max'             => 'The Email you entered is too long',
+                'email.unique'          => 'The is already a Candidate in the database with this email address',
+
+                'city.max'              => 'The city cannot be longer than 255 characters',
+
+                'state.alpha'           => 'The state can only contain letters',
+                'state.max'             => 'Please use the 2 letter state abbreviation',
+
+                'jobTitle.max'             => 'The job title you entered is too long',
+
+                'industry.required'     => 'An industry must be specified for this candidate',
+                'industry.max'          => 'An industry cannot be longer than 255 characters',
+
+                'summary.required'      => 'A summary of the candidate is required',
+                'summary.max'           => 'A summary cannot be longer than 500 characters',
+            ]
+        );
+        try {
+            $candidate->update([
+                'walter_id' => $request->walterID,
+                'first_name' => $request->firstName,
+                'last_name' => $request->lastName,
+                'email' => $request->email,
+                'job_title' => $request->jobTitle,
+                'city' => $request->city,
+                'state' => $request->state,
+                'industry' => $request->industry,
+                'summary' => $request->summary,
+            ]);
+        } catch (Exception $e) {
+            return $this->response($e->getMessage(), 500);
+        }
+
+        return redirect()->route('dashboard')->withStatus($request->firstName. ' ' .$request->lastName. ' was successfully updated!');
     }
 
     /**
@@ -124,8 +201,10 @@ class CandidateController extends Controller
      * @param  \App\Candidate  $candidate
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Candidate $candidate)
+    public function destroy(Request $request, $candidateId)
     {
-        //
+        $candidate = Candidate::findOrFail($candidateId)->delete();
+
+        return redirect()->route('dashboard')->withStatus($request->firstName. ' ' .$request->lastName. ' was successfully deleted!');
     }
 }

@@ -2,13 +2,17 @@
     <br>
     <h2>Candidates</h2>
 
-    <table id="candidatesTable" class="display" style="width:100%">
+    <a href="{{ route('create.candidate') }}">Add a Candidate</a>
+
+    <table id="candidatesTable" class="display compact" style="width:100%">
         <thead>
             <tr>
                 <th>Walter ID</th>
                 <th>Name</th>
-                <th>Phone</th>
-                <th>Email</th>
+                <th>Industry</th>
+                <th>Summary</th>
+                <th>City</th>
+                <th>State</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -21,18 +25,20 @@
         
         $('#candidatesTable').DataTable({
             processing: true,
-            serverSide: true,
             ajax: "{{ route('index.candidates') }}",
             columns: [
                 {data: 'walter_id', name: 'walter_id'},
                 {data: 'name', name: 'name'},
-                {data: 'phone', name: 'phone'},
-                {data: 'email', name: 'email'},
+                {data: 'industry', name: 'industry'},
+                {data: 'summary', name: 'summary'},
+                {data: 'city', name: 'city'},
+                {data: 'state', name: 'state'},
                 {
                     data: null, 
-                    name: 'actions', 
+                    name: 'action',
+                    orderable: false,
                     render: function (data, type, row) {
-                        return '<button class="btn btn-info btn-sm btn-block font-weight-bold">Email '+data.name+'</button>';
+                        return `<a class="btn btn-info btn-sm btn-block" href="/dashboard/candidates/${data.id}/edit-candidate">Edit ${data.name}</a>`;
                     }
                 }
             ]

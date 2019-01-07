@@ -24,6 +24,7 @@
                     </div>
 
                     @include('admin.partials.employers')
+                    @include('email.modals.email-employer-form')
 
                     @include('admin.partials.candidates')
                 </div>
