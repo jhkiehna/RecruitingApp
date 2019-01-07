@@ -40,6 +40,7 @@ class NotifyClient extends Mailable
     public function build()
     {
         return $this->from($this->fromAddress)
+            ->subject('Top ' . $this->setIndustry() . ' Candidates on the Market')
             ->view('email.html.clientHotsheet')
             ->text('email.text.clientHotsheet')
             ->with([
