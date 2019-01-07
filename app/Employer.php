@@ -17,7 +17,6 @@ class Employer extends Model
         'last_name',
         'company',
         'email',
-        'phone',
     ];
 
     protected $dates = [
@@ -26,13 +25,13 @@ class Employer extends Model
         'deleted_at'
     ];
 
-    public function transformer()
+    public function transform()
     {
         return [
+            'id' => $this->id,
             'walter_id' => $this->walter_id,
             'name' => $this->full_name,
             'company' => $this->company,
-            'phone' => $this->phone,
             'email' => $this->email
         ];
     }

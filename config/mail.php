@@ -120,4 +120,8 @@ return [
         ],
     ],
 
+    'style' => [
+        'color' => '#E8E3D9'
+    ]
+
 ];

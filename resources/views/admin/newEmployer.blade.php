@@ -55,11 +55,6 @@
                             <label for="email">Email</label>
                             <input class="form-control {{$errors->has('email') ? 'alert alert-danger' : ''}}" type="email" name="email" id="email" placeholder="..." value="{{old('email')}}">
                         </div>
-
-                        <div class="form-group">
-                            <label for="phone">Phone Number</label>
-                            <input class="form-control {{$errors->has('phone') ? 'alert alert-danger' : ''}}" type="text" name="phone" id="phone" placeholder="..." value="{{old('phone')}}">
-                        </div>
                         
                         <button type="submit" class="btn btn-primary">Add to Employers</button>
                     </form>
