@@ -6,7 +6,7 @@
             </td>
             <td style="text-align: right; padding: 20px; font-size: 12px; font-family: Helvetica, sans-serif;">
                 <div>
-                    © 1981 — 2018
+                    © 1981 — 2019
                     <span style="font-weight: bold;">
                         Kimmel &amp; Associates, Inc.
                     </span>
