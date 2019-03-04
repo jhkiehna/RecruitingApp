@@ -15,10 +15,7 @@ class EmployerEmailController extends Controller
     {
         $employer = Employer::findOrFail($employerId);
 
-        $candidates = collect($request->except('_token'))
-        ->map(function($value) {
-            return Candidate::findOrFail($value);
-        })->values();
+        $candidates = $this->collectCandidatesFromRequest($request);
 
         Mail::to($employer->email)
         ->bcc(config('mail.from.address'))
@@ -31,13 +28,18 @@ class EmployerEmailController extends Controller
     {
         $employer = Employer::findOrFail($employerId);
 
-        $candidates = collect($request)
+        $candidates = $this->collectCandidatesFromRequest($request);
+
+        return (new NotifyClient($candidates, $employer))->preview();
+    }
+
+    private function collectCandidatesFromRequest($request)
+    {
+        return collect($request)
         ->reject(function ($value, $key) {
             return $key == '_token' || $key == 'path';
         })->map(function($value) {
             return Candidate::findOrFail($value);
         })->values();
-
-        return (new NotifyClient($candidates, $employer))->preview();
     }
 }
