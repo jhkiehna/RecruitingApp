@@ -45,13 +45,12 @@
                 @foreach($candidates as $candidate)
                     <p style="color: #505050; font-family: 'Trebuchet MS', Verdana, Arial, sans-serif; font-size: 12px; line-height: 110%; text-align: left;">
                         <a style="color: #e87600;" href="{{$contactLink}}?subject=Candidate-{{$candidate->walter_id}}"><strong>
-                            {{ $candidate->walter_id }} – {{ $candidate->job_title }} (
+                            {{ $candidate->walter_id }} – {{ $candidate->job_title }}
                                 @if(!empty($candidate->city) && !empty($candidate->state))
-                                    {{ $candidate->city }}, {{ $candidate->state }}
+                                    ( {{ $candidate->city }}, {{ $candidate->state }} )
                                 @elseif(!empty($candidate->state))
-                                    {{$candidate->state}}
+                                    ( {{$candidate->state}} )
                                 @endif
-                            )
                         </strong></a>
                         – {{ $candidate->summary }}
                     </p>
