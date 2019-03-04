@@ -31,8 +31,10 @@ class EmployerEmailController extends Controller
     {
         $employer = Employer::findOrFail($employerId);
 
-        $candidates = collect($request->except('_token'))
-        ->map(function($value) {
+        $candidates = collect($request)
+        ->reject(function ($value, $key) {
+            return $key == '_token' || $key == 'path';
+        })->map(function($value) {
             return Candidate::findOrFail($value);
         })->values();
 
