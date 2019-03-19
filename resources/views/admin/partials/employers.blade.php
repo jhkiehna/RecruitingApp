@@ -97,6 +97,23 @@
                             console.log("nothing selected");
                         }
                     });
+
+                    $("#emailAllSendButton").click(function() {
+                        var action = `dashboard/emailEmployer/${empId}`;
+                        modal.find("#emailEmployerForm").attr('action', action);
+
+                        var inputs = $("#candidatesTableModal tr td input");
+                        inputs.each(function() {
+                            $(this).appendTo(modal.find("#emailEmployerForm"));
+                        });
+
+                        if (inputs.length > 0){
+                            modal.find("#emailEmployerForm").submit();
+                        }
+                        else {
+                            console.log("nothing selected");
+                        }
+                    });
                 }
             });
             

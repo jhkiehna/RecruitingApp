@@ -30,7 +30,8 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-info" id="emailPreviewButton">Preview Email</button>
-                <button type="button" class="btn btn-success" id="emailSendButton">Send Email</button>
+                <button type="button" class="btn btn-success" id="emailSendButton">Email Selected</button>
+                <button type="button" class="btn btn-success" id="emailAllSendButton">Email All Candidates</button>
                 <form action="" method="POST" autocomplete="off" id="emailPreviewForm">@csrf</form>
                 <form action="" method="POST" autocomplete="off" id="emailEmployerForm">@csrf</form>
             </div>
