@@ -23,10 +23,10 @@
                         </div>
                     </div>
 
+                    @include('admin.partials.candidates')
+
                     @include('admin.partials.employers')
                     @include('email.modals.email-employer-form')
-
-                    @include('admin.partials.candidates')
                 </div>
             </div>
         </div>
