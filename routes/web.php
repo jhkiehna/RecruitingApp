@@ -18,6 +18,9 @@ Route::get('/', function () {
 Route::get('/dashboard', 'AdminController@index')->name('dashboard');
 
 Route::prefix('/dashboard')->middleware('auth')->group(function () {
+    Route::get('/change-password', 'Auth\UserController@edit')->name('edit.password');
+    Route::patch('/change-password', 'Auth\UserController@update')->name('update.password');
+
     Route::prefix('/candidates')->group(function () {
         Route::get('/', 'CandidateController@index')->name('index.candidates');
         Route::get('/create-candidate', 'CandidateController@create')->name('create.candidate');
