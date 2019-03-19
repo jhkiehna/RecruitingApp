@@ -52,7 +52,7 @@ class CandidateController extends Controller
                 'state'         => 'alpha|max:2|nullable',
                 'jobTitle'      => 'max:255|nullable',
                 'industry'      => 'required|max:255',
-                'summary'       => 'required|max:500',
+                'summary'       => 'required|max:65000',
             ],
             [
                 'walterID.numeric'      => 'A Walter Id can only contain numbers',
@@ -80,7 +80,7 @@ class CandidateController extends Controller
                 'industry.max'          => 'An industry cannot be longer than 255 characters',
 
                 'summary.required'      => 'A summary of the candidate is required',
-                'summary.max'           => 'A summary cannot be longer than 500 characters',
+                'summary.max'           => 'A summary cannot be longer than 65,000 characters'
             ]
         );
 
@@ -147,7 +147,7 @@ class CandidateController extends Controller
                 'state'         => 'alpha|max:2|nullable',
                 'jobTitle'      => 'max:255|nullable',
                 'industry'      => 'required|max:255',
-                'summary'       => 'required|max:500',
+                'summary'       => 'required|max:65000',
             ],
             [
                 'walterId.required'     => 'A walter Id is required',
@@ -176,7 +176,7 @@ class CandidateController extends Controller
                 'industry.max'          => 'An industry cannot be longer than 255 characters',
 
                 'summary.required'      => 'A summary of the candidate is required',
-                'summary.max'           => 'A summary cannot be longer than 500 characters',
+                'summary.max'           => 'A summary cannot be longer than 65,000 characters. You entered '. strlen($request->summary),
             ]
         );
         try {
