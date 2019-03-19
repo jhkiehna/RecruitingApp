@@ -30,12 +30,8 @@
                         @csrf
 
                         <div class="form-group">
-                            <label for="walterID">Walter ID</label>
-                            @if($employer->walter_id == 'No ID')
-                                <input class="form-control {{$errors->has('walterID') ? 'alert alert-danger' : ''}}" type="text" name="walterID" id="walterID" placeholder="No ID..." value="{{old('walterID')}}">
-                            @else
-                                <input class="form-control {{$errors->has('walterID') ? 'alert alert-danger' : ''}}" type="text" name="walterID" id="walterID" placeholder="..." value="{{old('walterID') ?? $employer->walter_id }}">
-                            @endif
+                            <label for="walter_id">Walter ID</label>
+                            <input class="form-control {{$errors->has('walter_id') ? 'alert alert-danger' : ''}}" type="text" name="walter_id" id="walter_id" placeholder="..." value="{{old('walter_id') ?? $employer->walter_id}}">
                         </div>
 
                         <div class="form-row">

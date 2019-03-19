@@ -51,7 +51,7 @@ class Candidate extends Model
 
     public function getWalterIdAttribute($walter_id)
     {
-        return $walter_id ?? 'No ID';
+        return $walter_id;
     }
 
     public function getFullNameAttribute()

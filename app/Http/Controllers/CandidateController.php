@@ -44,9 +44,9 @@ class CandidateController extends Controller
     {
         $request->validate(
             [
-                'walterID'      => 'numeric|nullable',
-                'firstName'     => 'required|alpha|max:255',
-                'lastName'      => 'required|alpha|max:255',
+                'walterID'      => 'required|numeric|unique:candidates,walter_id|unique:employers,walter_id',
+                'firstName'     => 'required|string|max:255',
+                'lastName'      => 'required|string|max:255',
                 'email'         => 'max:255|nullable|unique:candidates,email',
                 'city'          => 'max:255|nullable',
                 'state'         => 'alpha|max:2|nullable',
@@ -56,13 +56,14 @@ class CandidateController extends Controller
             ],
             [
                 'walterID.numeric'      => 'A Walter Id can only contain numbers',
+                'walterID.unique'       => 'This walter Id is already assigned to a candidate or employer',
 
                 'firstName.required'    => 'First Name is required',
-                'firstName.alpha'       => 'First Name can only contain letters',
+                'firstName.string'       => 'First Name must be a string',
                 'firstName.max'         => 'The First Name you entered is too long',
 
                 'lastName.required'     => 'Last Name is required',
-                'lastName.alpha'        => 'Last Name can only contain letters',
+                'lastName.string'        => 'Last Name must be a string',
                 'lastName.max'          => 'The Last Name you entered is too long',
 
                 'email.max'             => 'The Email you entered is too long',
@@ -138,9 +139,9 @@ class CandidateController extends Controller
         $candidate = Candidate::findOrFail($candidateId);
         $request->validate(
             [
-                'walterID'      => 'numeric|nullable',
-                'firstName'     => 'required|alpha|max:255',
-                'lastName'      => 'required|alpha|max:255',
+                'walterID'      => 'required|numeric|unique:candidates,walter_id,'. $candidate->id .'|unique:employers,walter_id',
+                'firstName'     => 'required|string|max:255',
+                'lastName'      => 'required|string|max:255',
                 'email'         => 'nullable|max:255|unique:candidates,email,'. $candidate->id,
                 'city'          => 'max:255|nullable',
                 'state'         => 'alpha|max:2|nullable',
@@ -149,14 +150,16 @@ class CandidateController extends Controller
                 'summary'       => 'required|max:500',
             ],
             [
+                'walterId.required'     => 'A walter Id is required',
                 'walterID.numeric'      => 'A Walter Id can only contain numbers',
+                'walterID.unique'       => 'This walter Id is already assigned to a candidate or employer',
 
                 'firstName.required'    => 'First Name is required',
-                'firstName.alpha'       => 'First Name can only contain letters',
+                'firstName.string'       => 'First Name must be a string',
                 'firstName.max'         => 'The First Name you entered is too long',
 
                 'lastName.required'     => 'Last Name is required',
-                'lastName.alpha'        => 'Last Name can only contain letters',
+                'lastName.string'        => 'Last Name must be a string',
                 'lastName.max'          => 'The Last Name you entered is too long',
 
                 'email.max'             => 'The Email you entered is too long',

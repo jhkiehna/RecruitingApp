@@ -15,11 +15,11 @@ class CreateEmployersTable extends Migration
     {
         Schema::create('employers', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('walter_id')->nullable();
+            $table->integer('walter_id')->nullable()->unique();
             $table->string('first_name');
             $table->string('last_name');
             $table->string('company');
-            $table->string('email');
+            $table->string('email')->unique();
 
             $table->timestamps();
             $table->softDeletes();
