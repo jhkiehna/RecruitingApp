@@ -4,6 +4,20 @@
 
     <a href="{{ route('create.employer') }}">Add an Employer</a>
 
+    <br>
+
+    <div class="row">
+        <div class="col-8">
+            <button class="btn btn-success btn-block font-weight-bold email-employer" data-toggle="modal" data-target="#email-employer-modal">Email <br> All Employers</button>
+        </div>
+
+        <div class="col-4">
+            <button class="btn btn-info btn-block font-weight-bold email-employer" data-toggle="modal" data-target="#email-employer-modal">Email <br> Selected Employers</button>
+        </div>
+    </div>
+
+    <br>
+
     <table id="employersTable" class="display compact" style="width:100%">
         <thead>
             <tr>
@@ -34,8 +48,7 @@
                     name: 'actions',
                     orderable: false,
                     render: function (data, type, row) {
-                        return '<button class="btn btn-success btn-sm btn-block font-weight-bold email-employer" data-toggle="modal" data-target="#email-employer-modal" data-employer-id="'+data.id+'">Email <br>'+data.name+'</button>'
-                        +`<a class="btn btn-info btn-sm btn-block edit-employer" href="/dashboard/employers/${data.id}/edit-employer">Edit ${data.name}</a>`;
+                        return `<a class="btn btn-info btn-sm btn-block edit-employer" href="/dashboard/employers/${data.id}/edit-employer">Edit ${data.name}</a>`;
                     }
                 }
             ]

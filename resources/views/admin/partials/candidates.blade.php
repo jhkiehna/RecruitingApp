@@ -10,7 +10,7 @@
                 <th>Walter ID</th>
                 <th>Name</th>
                 <th>Industry</th>
-                <th>Summary</th>
+                <th>Job Title</th>
                 <th>City</th>
                 <th>State</th>
                 <th>Action</th>
@@ -30,7 +30,7 @@
                 {data: 'walter_id', name: 'walter_id'},
                 {data: 'name', name: 'name'},
                 {data: 'industry', name: 'industry'},
-                {data: 'summary', name: 'summary'},
+                {data: 'job_title', name: 'job_title'},
                 {data: 'city', name: 'city'},
                 {data: 'state', name: 'state'},
                 {

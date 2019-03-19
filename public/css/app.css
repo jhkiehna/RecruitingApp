@@ -10487,3 +10487,10 @@ a.text-dark:focus {
   padding-right: 2px;
 }
 
+@media (min-width: 768px) {
+  .container {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+}
+

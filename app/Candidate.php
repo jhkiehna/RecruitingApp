@@ -43,7 +43,7 @@ class Candidate extends Model
             'walter_id' => $this->walter_id,
             'name' => $this->full_name,
             'industry' => $this->industry,
-            'summary' => $this->job_title . ' - ' . $summary,
+            'job_title' => $this->job_title,
             'city' => $this->city,
             'state' => $this->state,
         ];
