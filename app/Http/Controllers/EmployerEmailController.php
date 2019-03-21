@@ -42,7 +42,7 @@ class EmployerEmailController extends Controller
     public function preview(Request $request)
     {
         if (empty($request->employers)) {
-            $employers = Employer::all();    
+            $employers = Employer::all();
         } else {
             $employers = collect(explode(',', $request->employers))->map(function ($employerId) {
                 return Employer::findOrFail((int) $employerId);

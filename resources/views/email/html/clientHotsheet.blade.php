@@ -12,7 +12,7 @@
         <tr>
             <td valign="center" style="color: #505050; font-family: Helvetica, sans-serif; font-size: 16px; line-height: 150%; text-align: left; padding: 12px 20px;">
                 <h1 style="color: #505050; font-family: 'Trebuchet MS', Verdana, Arial, sans-serif; font-size: 18px; line-height: 110%; text-align: left; font-weight: bold;">
-                    Top {{ $industry }} Candidates on the Market
+                    Top Candidates on the Market
                 </h1>
                 <p style="color: #505050; font-family: 'Trebuchet MS', Verdana, Arial, sans-serif; font-size: 12px; line-height: 110%; text-align: left;">
                     At Kimmel &amp; Associates, we
@@ -63,11 +63,7 @@
                     </a>
                 </p>
                 <h1 style="color: #505050; font-family: 'Trebuchet MS', Verdana, Arial, sans-serif; font-size: 18px; line-height: 110%; text-align: left; font-weight: bold;">
-                    <a style="color: #e87600;" href="https://kimmel.com/candidates/offering-and-accepting-counteroffers-its-a-mistake.html?utm_source=ConNews918&amp;utm_medium=email&amp;utm_term=construction&amp;utm_content=hotsheet&amp;utm_campaign=ConNews918">
-                        Offering and Accepting
-                        Counteroffers: It’s a
-                        Mistake!
-                    </a>
+                    Justin Wilkins
                 </h1>
                 <p style="color: #505050; font-family: 'Trebuchet MS', Verdana, Arial, sans-serif; font-size: 12px; line-height: 110%; text-align: left;">
                     If you have been in the workforce

@@ -1,7 +1,7 @@
 
 {{ $employer->first_name }} {{ $employer->last_name }},
 
-Top {{ empty(!$industry) }} Candidates on the Market
+Top Candidates on the Market
 
 At Kimmel & Associates, we realize that this is a candidate-tight market and great candidates are hard to find. 
 However, we have long-standing relationships with tens of thousands of construction professionals; 
