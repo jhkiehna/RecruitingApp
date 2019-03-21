@@ -41,8 +41,8 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
         Route::get('/{employerId}', 'EmployerController@show')->name('show.employer');
     });
 
-    Route::post('/emailEmployer/{employerId}', 'EmployerEmailController@send')->name('email.employer');
-    Route::post('/previewEmailEmployer/{employerId}', 'EmployerEmailController@preview')->name('previewEmail.employer');
+    Route::post('/emailEmployers', 'EmployerEmailController@send')->name('email.employers');
+    Route::post('/previewEmailEmployers', 'EmployerEmailController@preview')->name('previewEmail.employers');
 });
 
 //Auth routes

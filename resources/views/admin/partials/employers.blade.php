@@ -6,17 +6,10 @@
 
     <br>
 
-    <div class="row">
-        <div class="col-8">
-            <button class="btn btn-success btn-block font-weight-bold email-employer" data-toggle="modal" data-target="#email-employer-modal">Email <br> All Employers</button>
-        </div>
-
-        <div class="col-4">
-            <button class="btn btn-info btn-block font-weight-bold email-employer" data-toggle="modal" data-target="#email-employer-modal">Email <br> Selected Employers</button>
-        </div>
-    </div>
-
-    <br>
+    <p>Select all the Employers you wish to email, or Press Email All Employers.<br>
+        <span class="keyboard-key">⇧ Shift</span>+Click to select multiple rows.<br>
+        <span class="keyboard-key">Ctrl</span>+Click (Windows) or <span class="keyboard-key">⌘</span>+Click (Mac) to select additional rows.
+    </p>
 
     <table id="employersTable" class="display compact" style="width:100%">
         <thead>
@@ -26,9 +19,20 @@
                 <th>Company</th>
                 <th>Email</th>
                 <th>Actions</th>
+                <th>Select</th>
             </tr>
         </thead>
     </table>
+
+    <br>
+
+    <button class="btn btn-success btn-lg btn-block font-weight-bold email-employer" data-toggle="modal" data-target="#email-employer-modal">Email Employers</button>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 </div>
 
 @section('employerScripts')
@@ -39,7 +43,14 @@
             processing: true,
             ajax: "{{ route('index.employers') }}",
             columns: [
-                {data: 'walter_id', name: 'walter_id'},
+                {
+                    data: null,
+                    name: 'walter_id',
+                    orderable: true,
+                    render: function (data, type, row) {
+                        return '<span>'+data.walter_id+'</span><input type="hidden" id="employerID" name="'+data.id+'" value="'+data.id+'">';
+                    }
+                },
                 {data: 'name', name: 'name'},
                 {data: 'company', name: 'company'},
                 {data: 'email', name: 'email'},
@@ -50,74 +61,90 @@
                     render: function (data, type, row) {
                         return `<a class="btn btn-info btn-sm btn-block edit-employer" href="/dashboard/employers/${data.id}/edit-employer">Edit ${data.name}</a>`;
                     }
-                }
-            ]
+                },
+                {data: null, name: 'select'}
+            ],
+            select: {
+                style:    'os',
+            },
+            columnDefs: [ {
+                orderable: false,
+                className: 'select-checkbox',
+                targets:   5,
+                defaultContent: '',
+            } ],
         });
 
         $('#email-employer-modal').on('show.bs.modal', function (event) {
             var modal = $(this);
-            var empId = $(event.relatedTarget).data('employer-id');
 
-            $.ajax({
-                url: `dashboard/employers/${empId}`,
-                async: true,
-                success: function(response) {
-                    modal.find('h5#email-employer-modal-title').text('Email ' + response.email);
-                    
-                    $("#emailPreviewButton").click(function() {
-                        var action = `dashboard/previewEmailEmployer/${empId}`;
-                        modal.find("#emailPreviewForm").attr('action', action);
+            var employerFields = $("#employersTable tr.selected td input");
+            var employersArray = [];
 
-                        var inputs = $("#candidatesTableModal tr.selected td input");
-                        inputs.each(function() {
-                            $(this).appendTo(modal.find("#emailPreviewForm"));
-                        });
+            employerFields.each(function() {
+                employersArray.push(parseInt($(this).attr('name')));
+            });
 
-                        if (inputs.length > 0){
-                            modal.find("#emailPreviewForm").submit();
-                        }
-                        else {
-                            console.log("nothing selected");
-                        }
-                    });
+            console.log(employersArray);
 
-                    $("#emailSendButton").click(function() {
-                        var action = `dashboard/emailEmployer/${empId}`;
-                        modal.find("#emailEmployerForm").attr('action', action);
+            if (employersArray.length == 0) {
+                modal.find('h5#email-employer-modal-title').text('Email All Employers');
+            } else {
+                modal.find('h5#email-employer-modal-title').text('Email '+ employersArray.length + ' Employers');
 
-                        var inputs = $("#candidatesTableModal tr.selected td input");
-                        inputs.each(function() {
-                            $(this).appendTo(modal.find("#emailEmployerForm"));
-                        });
+                var employerInputElement = $('<input>', {
+                    type: 'hidden',
+                    name: 'employers',
+                    value: employersArray
+                });
+                employerInputElement.appendTo(modal.find("#emailEmployerForm"));
+            }
 
-                        if (inputs.length > 0){
-                            modal.find("#emailEmployerForm").submit();
-                        }
-                        else {
-                            console.log("nothing selected");
-                        }
-                    });
+            $("#emailPreviewButton").click(function() {
+                var action = `dashboard/previewEmailEmployers`;
+                modal.find("#emailEmployerForm").attr('action', action);
 
-                    $("#emailAllSendButton").click(function() {
-                        var action = `dashboard/emailEmployer/${empId}`;
-                        modal.find("#emailEmployerForm").attr('action', action);
+                var candidateFields = $("#candidatesTableModal tr.selected td input");
+                var candidatesArray = [];
+                candidateFields.each(function() {
+                    candidatesArray.push(parseInt($(this).attr('name')));
+                });
+                var candidateInputElement = $('<input>', {
+                    type: 'hidden',
+                    name: 'candidates',
+                    value: candidatesArray
+                });
+                candidateInputElement.appendTo(modal.find("#emailEmployerForm"));
 
-                        var inputs = $("#candidatesTableModal tr td input");
-                        inputs.each(function() {
-                            $(this).appendTo(modal.find("#emailEmployerForm"));
-                        });
-
-                        if (inputs.length > 0){
-                            modal.find("#emailEmployerForm").submit();
-                        }
-                        else {
-                            console.log("nothing selected");
-                        }
-                    });
+                if (candidatesArray.length > 0){
+                    modal.find("#emailEmployerForm").submit();
+                }
+                else {
+                    console.log("nothing selected");
                 }
             });
-            
-            
+
+            $("#emailSendButton").click(function() {
+                var action = `dashboard/emailEmployers`;
+                modal.find("#emailEmployerForm").attr('action', action);
+
+                var candidateFields = $("#candidatesTableModal tr.selected td input");
+                var candidatesArray = [];
+                candidateFields.each(function() {
+                    candidatesArray.push(parseInt($(this).attr('name')));
+                });
+
+                if (candidatesArray > 0) {
+                    var candidateInputElement = $('<input>', {
+                        type: 'hidden',
+                        name: 'candidates',
+                        value: candidatesArray
+                    });
+                    candidateInputElement.appendTo(modal.find("#emailEmployerForm"));
+                }
+
+                modal.find("#emailEmployerForm").submit();
+            });
         });
     });
 </script>
