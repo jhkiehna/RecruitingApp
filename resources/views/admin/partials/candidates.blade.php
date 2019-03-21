@@ -11,8 +11,7 @@
                 <th>Name</th>
                 <th>Industry</th>
                 <th>Job Title</th>
-                <th>City</th>
-                <th>State</th>
+                <th>Location Preference</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -31,8 +30,7 @@
                 {data: 'name', name: 'name'},
                 {data: 'industry', name: 'industry'},
                 {data: 'job_title', name: 'job_title'},
-                {data: 'city', name: 'city'},
-                {data: 'state', name: 'state'},
+                {data: 'location_preference', name: 'location_preference'},
                 {
                     data: null, 
                     name: 'action',

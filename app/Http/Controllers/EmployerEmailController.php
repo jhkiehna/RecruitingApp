@@ -13,7 +13,7 @@ class EmployerEmailController extends Controller
     public function send(Request $request)
     {
         if (empty($request->employers)) {
-            $employers = Employer::all();    
+            $employers = Employer::all();
         } else {
             $employers = collect(explode(',', $request->employers))->map(function ($employerId) {
                 return Employer::findOrFail((int) $employerId);
@@ -28,10 +28,10 @@ class EmployerEmailController extends Controller
             });
         }
 
-        $employers->each(function ($employer) use ($candidates){
+        $employers->each(function ($employer) use ($candidates) {
             Mail::to($employer->email)
                 ->queue(new NotifyClient($candidates, $employer));
-        }); 
+        });
 
         Mail::to(config('mail.from.address'))
             ->queue(new NotifyClient($candidates, $employers->first()));

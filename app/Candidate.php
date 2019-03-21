@@ -18,8 +18,7 @@ class Candidate extends Model
         'job_title',
         'industry',
         'summary',
-        'city',
-        'state',
+        'location_preference',
         'email',
     ];
 
@@ -44,8 +43,7 @@ class Candidate extends Model
             'name' => $this->full_name,
             'industry' => $this->industry,
             'job_title' => $this->job_title,
-            'city' => $this->city,
-            'state' => $this->state,
+            'location_preference' => $this->location_preference,
         ];
     }
 
@@ -57,10 +55,5 @@ class Candidate extends Model
     public function getFullNameAttribute()
     {
         return $this->first_name .' '. $this->last_name;
-    }
-
-    public function setStateAttribute($value)
-    {
-        $this->attributes['state'] = strtoupper($value);
     }
 }

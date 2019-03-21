@@ -10,10 +10,10 @@ even in this market, we can identify outstanding candidates with exceptional ski
 Below, please find an introduction to a few candidates with whom we are currently working.
 
 @foreach($candidates as $candidate)
-@if(!empty($candidate->city) && !empty($candidate->state))
-{{ $candidate->walter_id }} – {{ $candidate->job_title }} ( {{$candidate->industry}} {{ $candidate->city }}, {{ $candidate->state }} )
-@elseif(!empty($candidate->state))
-{{ $candidate->walter_id }} – {{ $candidate->job_title }} ( {{$candidate->industry}} {{$candidate->state}} )
+@if(!empty($candidate->location_preference))
+{{ $candidate->walter_id }} – {{ $candidate->job_title }} ( {{$candidate->industry}} {{ $candidate->location_preference }} )
+@else
+{{ $candidate->walter_id }} – {{ $candidate->job_title }} ( {{$candidate->industry}} )
 @endif
 
     – {{ $candidate->summary }}

@@ -38,14 +38,13 @@ class NotifyClient extends Mailable
     public function build()
     {
         return $this->from($this->fromAddress)
-            ->subject('Top ' . $this->setIndustry() . ' Candidates on the Market')
+            ->subject('Top Candidates on the Market')
             ->view('email.html.clientHotsheet')
             ->text('email.text.clientHotsheet')
             ->with([
                 'candidates' => $this->candidates,
                 'employer' => $this->employer,
                 'contactLink' => 'mailto:' . $this->fromAddress,
-                'industry' => $this->setIndustry()
             ]);
     }
 
@@ -55,24 +54,6 @@ class NotifyClient extends Mailable
             'candidates' => $this->candidates,
             'employer' => $this->employer,
             'contactLink' => 'mailto:testlink@test.com',
-            'industry' => $this->setIndustry()
         ]);
-    }
-
-    private function setIndustry()
-    {
-        $industries = $this->candidates->map(function($candidate){
-            return $candidate->industry;
-        })->unique();
-
-        if ($industries->count() > 2) {
-            return '';
-        }
-
-        if ($industries->count() > 1) {
-            return $industries[0] . ' and ' . $industries[1];
-        }
-        
-        return $industries->first();
     }
 }
