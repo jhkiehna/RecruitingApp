@@ -21,7 +21,8 @@ class CreateCandidatesTable extends Migration
             $table->string('job_title');
             $table->string('industry');
             $table->text('summary');
-            $table->string('location_preference')->nullable();
+            $table->string('city')->nullable();
+            $table->string('state')->nullable();
             $table->string('email')->nullable()->unique();
             
             $table->timestamps();
