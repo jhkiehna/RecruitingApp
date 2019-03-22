@@ -10,12 +10,13 @@ use App\Employer;
 class NotifyClient extends Mailable
 {
     use Queueable, SerializesModels;
-
+    
     protected $candidates;
     protected $employer;
     protected $fromAddress;
     protected $fromName;
-
+    private $phone;
+    
     /**
      * Create a new message instance.
      *
@@ -28,6 +29,7 @@ class NotifyClient extends Mailable
 
         $this->fromAddress = config('mail.from.address');
         $this->fromName = config('mail.from.name');
+        $this->phone = config('mail.phone_number');
     }
    
     /**
@@ -45,6 +47,7 @@ class NotifyClient extends Mailable
                 'candidates' => $this->candidates,
                 'employer' => $this->employer,
                 'contactLink' => 'mailto:' . $this->fromAddress,
+                'phone' => $this->phone,
             ]);
     }
 
@@ -54,6 +57,7 @@ class NotifyClient extends Mailable
             'candidates' => $this->candidates,
             'employer' => $this->employer,
             'contactLink' => 'mailto:testlink@test.com',
+            'phone' => $this->phone,
         ]);
     }
 }

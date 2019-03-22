@@ -122,6 +122,8 @@ return [
 
     'style' => [
         'color' => '#E8E3D9'
-    ]
+    ],
+
+    'phone_number' => env('PHONE', ''),
 
 ];

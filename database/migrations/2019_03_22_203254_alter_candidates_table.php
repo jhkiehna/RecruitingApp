@@ -17,7 +17,7 @@ class AlterCandidatesTable extends Migration
             $table->dropColumn('city');
             $table->dropColumn('state');
 
-            $table->string('location_preference');
+            $table->string('location_preference')->nullable();
         });
     }
 

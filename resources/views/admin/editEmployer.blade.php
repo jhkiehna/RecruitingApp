@@ -30,7 +30,7 @@
                         @csrf
 
                         <div class="form-group">
-                            <label for="walter_id">Walter ID</label>
+                            <label for="walter_id">Walter ID (Optional)</label>
                             <input class="form-control {{$errors->has('walter_id') ? 'alert alert-danger' : ''}}" type="text" name="walter_id" id="walter_id" placeholder="..." value="{{old('walter_id') ?? $employer->walter_id}}">
                         </div>
 
