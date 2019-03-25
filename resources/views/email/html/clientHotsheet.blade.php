@@ -68,8 +68,8 @@
     </tbody>
 </table>
 <p style="color: #505050; font-family: 'Trebuchet MS', Verdana, Arial, sans-serif; font-size: 12px; line-height: 110%; text-align: center;">
-    <a style="color: #e87600;" href="http://kimmel.com/jobs/?utm_source=ConNews918&amp;utm_medium=email&amp;utm_term=construction&amp;utm_content=hotsheet&amp;utm_campaign=ConNews918">
-        <img style="width: 100%;" src="https://media.kimmel.com/assets/img/uploads/kimmel-jobs/kimmel-jobs.jpg" alt=""/>
+    <a style="color: #e87600;" href="{{$contactLink}}">
+        <img style="width: 100%;" src="{{ asset('Kimmel-Banner.png') }}" alt=""/>
     </a>
 </p>
 
