@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Employer;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use App\EmailHistory;
+use App\Candidate;
+use Illuminate\Support\Facades\DB;
 
 class EmployerController extends Controller
 {
@@ -107,8 +110,22 @@ class EmployerController extends Controller
     public function edit($employerId)
     {
         $employer = Employer::findOrFail($employerId);
+        $emailHistories = EmailHistory::select(DB::raw('candidate_id, count(candidate_id) as times'))
+            ->where('employer_id', $employer->id)
+            ->groupBy('candidate_id')
+            ->get();
+
+        $emailHistories = $emailHistories->map(function ($emailHistory) {
+            $candidate = Candidate::find($emailHistory->candidate_id);
+            $emailHistory->candidate_name = $candidate->first_name. ' ' .$candidate->last_name;
+            return $emailHistory;
+        });
         
-        return view('admin/editEmployer')->with(['employer' => $employer]);
+        return view('admin/editEmployer')
+            ->with([
+                'employer' => $employer,
+                'emailHistories' => $emailHistories,
+            ]);
     }
 
     /**

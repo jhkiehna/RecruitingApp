@@ -43,6 +43,8 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
 
     Route::post('/emailEmployers', 'EmployerEmailController@send')->name('email.employers');
     Route::post('/previewEmailEmployers', 'EmployerEmailController@preview')->name('previewEmail.employers');
+
+    Route::get('/emailHistories', 'EmailHistoriesController@index')->name('email-histories');
 });
 
 //Auth routes

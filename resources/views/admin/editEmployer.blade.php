@@ -69,6 +69,34 @@
             </div>
         </div>
     </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Candidates Emailed to this Employer</div>
+                
+                <div class="card-body">
+                    <table id="emailedCandidatesTable">
+                        <thead>
+                            <th>Candidate ID</th>
+                            <th>Candidate Name</th>
+                            <th>Times Emailed</th>
+                        </thead>
+                        
+                        <tbody>
+                            @foreach($emailHistories as $history)
+                                <tr>
+                                    <td>{{$history->candidate_id}}</td>
+                                    <td>{{$history->candidate_name}}</td>
+                                    <td>{{$history->times}}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 @endsection
 
@@ -86,7 +114,13 @@
             $("#deleteEmployerButton").click(function() {
                 $("#deleteEmployerForm").submit();
             });
-        })
+        });
+
+        $('#emailedCandidatesTable').DataTable({
+            order: [[ 1, "asc"]],
+            pageLength: 10,
+            responsive: true
+        });
     });
 </script>
 @endsection
