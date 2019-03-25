@@ -15,7 +15,7 @@ class CreateCandidatesTable extends Migration
     {
         Schema::create('candidates', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('walter_id')->nullable();
+            $table->integer('walter_id')->unique();
             $table->string('first_name');
             $table->string('last_name');
             $table->string('job_title');
@@ -23,7 +23,7 @@ class CreateCandidatesTable extends Migration
             $table->text('summary');
             $table->string('city')->nullable();
             $table->string('state')->nullable();
-            $table->string('email')->nullable();
+            $table->string('email')->nullable()->unique();
             
             $table->timestamps();
             $table->softDeletes();

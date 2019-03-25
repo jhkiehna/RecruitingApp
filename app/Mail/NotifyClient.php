@@ -6,16 +6,18 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use App\Employer;
+use App\EmailHistory;
 
 class NotifyClient extends Mailable
 {
     use Queueable, SerializesModels;
-
+    
     protected $candidates;
     protected $employer;
     protected $fromAddress;
     protected $fromName;
-
+    private $phone;
+    
     /**
      * Create a new message instance.
      *
@@ -28,6 +30,7 @@ class NotifyClient extends Mailable
 
         $this->fromAddress = config('mail.from.address');
         $this->fromName = config('mail.from.name');
+        $this->phone = config('mail.phone_number');
     }
    
     /**
@@ -37,15 +40,23 @@ class NotifyClient extends Mailable
      */
     public function build()
     {
+
+        $this->candidates->each(function ($candidate) {
+            EmailHistory::create([
+                'employer_id' => $this->employer->id,
+                'candidate_id' => $candidate->id,
+            ]);
+        });
+
         return $this->from($this->fromAddress)
-            ->subject('Top ' . $this->setIndustry() . ' Candidates on the Market')
+            ->subject('Top Candidates on the Market')
             ->view('email.html.clientHotsheet')
             ->text('email.text.clientHotsheet')
             ->with([
                 'candidates' => $this->candidates,
                 'employer' => $this->employer,
                 'contactLink' => 'mailto:' . $this->fromAddress,
-                'industry' => $this->setIndustry()
+                'phone' => $this->phone,
             ]);
     }
 
@@ -55,24 +66,7 @@ class NotifyClient extends Mailable
             'candidates' => $this->candidates,
             'employer' => $this->employer,
             'contactLink' => 'mailto:testlink@test.com',
-            'industry' => $this->setIndustry()
+            'phone' => $this->phone,
         ]);
-    }
-
-    private function setIndustry()
-    {
-        $industries = $this->candidates->map(function($candidate){
-            return $candidate->industry;
-        })->unique();
-
-        if ($industries->count() > 2) {
-            return '';
-        }
-
-        if ($industries->count() > 1) {
-            return $industries[0] . ' and ' . $industries[1];
-        }
-        
-        return $industries->first();
     }
 }

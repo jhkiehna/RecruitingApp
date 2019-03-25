@@ -18,6 +18,9 @@ Route::get('/', function () {
 Route::get('/dashboard', 'AdminController@index')->name('dashboard');
 
 Route::prefix('/dashboard')->middleware('auth')->group(function () {
+    Route::get('/change-password', 'Auth\UserController@edit')->name('edit.password');
+    Route::patch('/change-password', 'Auth\UserController@update')->name('update.password');
+
     Route::prefix('/candidates')->group(function () {
         Route::get('/', 'CandidateController@index')->name('index.candidates');
         Route::get('/create-candidate', 'CandidateController@create')->name('create.candidate');
@@ -38,8 +41,10 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
         Route::get('/{employerId}', 'EmployerController@show')->name('show.employer');
     });
 
-    Route::post('/emailEmployer/{employerId}', 'EmployerEmailController@send')->name('email.employer');
-    Route::post('/previewEmailEmployer/{employerId}', 'EmployerEmailController@preview')->name('previewEmail.employer');
+    Route::post('/emailEmployers', 'EmployerEmailController@send')->name('email.employers');
+    Route::post('/previewEmailEmployers', 'EmployerEmailController@preview')->name('previewEmail.employers');
+
+    Route::get('/emailHistories', 'EmailHistoriesController@index')->name('email-histories');
 });
 
 //Auth routes

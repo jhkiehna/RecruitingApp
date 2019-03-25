@@ -30,12 +30,8 @@
                         @csrf
 
                         <div class="form-group">
-                            <label for="walterID">Walter ID</label>
-                            @if($employer->walter_id == 'No ID')
-                                <input class="form-control {{$errors->has('walterID') ? 'alert alert-danger' : ''}}" type="text" name="walterID" id="walterID" placeholder="No ID..." value="{{old('walterID')}}">
-                            @else
-                                <input class="form-control {{$errors->has('walterID') ? 'alert alert-danger' : ''}}" type="text" name="walterID" id="walterID" placeholder="..." value="{{old('walterID') ?? $employer->walter_id }}">
-                            @endif
+                            <label for="walter_id">Walter ID (Optional)</label>
+                            <input class="form-control {{$errors->has('walter_id') ? 'alert alert-danger' : ''}}" type="text" name="walter_id" id="walter_id" placeholder="..." value="{{old('walter_id') ?? $employer->walter_id}}">
                         </div>
 
                         <div class="form-row">
@@ -73,6 +69,34 @@
             </div>
         </div>
     </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Candidates Emailed to this Employer</div>
+                
+                <div class="card-body">
+                    <table id="emailedCandidatesTable">
+                        <thead>
+                            <th>Candidate ID</th>
+                            <th>Candidate Name</th>
+                            <th>Times Emailed</th>
+                        </thead>
+                        
+                        <tbody>
+                            @foreach($emailHistories as $history)
+                                <tr>
+                                    <td>{{$history->candidate_id}}</td>
+                                    <td>{{$history->candidate_name}}</td>
+                                    <td>{{$history->times}}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 @endsection
 
@@ -90,7 +114,13 @@
             $("#deleteEmployerButton").click(function() {
                 $("#deleteEmployerForm").submit();
             });
-        })
+        });
+
+        $('#emailedCandidatesTable').DataTable({
+            order: [[ 1, "asc"]],
+            pageLength: 10,
+            responsive: true
+        });
     });
 </script>
 @endsection

@@ -7,39 +7,52 @@ use App\Candidate;
 use App\Mail\NotifyClient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use Input;
 
 class EmployerEmailController extends Controller
 {
-    public function send(Request $request, $employerId)
+    public function send(Request $request)
     {
-        $employer = Employer::findOrFail($employerId);
+        if (empty($request->employers)) {
+            $employers = Employer::all();
+        } else {
+            $employers = collect(explode(',', $request->employers))->map(function ($employerId) {
+                return Employer::findOrFail((int) $employerId);
+            });
+        }
 
-        $candidates = $this->collectCandidatesFromRequest($request);
+        if (empty($request->candidates)) {
+            $candidates = Candidate::all();
+        } else {
+            $candidates = collect(explode(',', $request->candidates))->map(function ($candidateId) {
+                return Candidate::findOrFail((int) $candidateId);
+            });
+        }
 
-        Mail::to($employer->email)
-        ->bcc(config('mail.from.address'))
-        ->send(new NotifyClient($candidates, $employer));
+        $employers->each(function ($employer) use ($candidates) {
+            Mail::to($employer->email)
+                ->queue(new NotifyClient($candidates, $employer));
+        });
 
-        return redirect()->route('dashboard')->withStatus('Email sent to ' . $employer->email . ' - Blind Carbon Copy sent to ' . config('mail.from.address'));
+        Mail::to(config('mail.from.address'))
+            ->queue(new NotifyClient($candidates, $employers->first()));
+
+        return redirect()->route('dashboard')->withStatus('Email(s) sent to ' . $employers->count() . ' employer(s) - A Copy was sent to ' . config('mail.from.address'));
     }
 
-    public function preview(Request $request, $employerId)
+    public function preview(Request $request)
     {
-        $employer = Employer::findOrFail($employerId);
+        if (empty($request->employers)) {
+            $employers = Employer::all();
+        } else {
+            $employers = collect(explode(',', $request->employers))->map(function ($employerId) {
+                return Employer::findOrFail((int) $employerId);
+            });
+        }
 
-        $candidates = $this->collectCandidatesFromRequest($request);
+        $candidates = collect(explode(',', $request->candidates))->map(function ($candidateId) {
+            return Candidate::findOrFail((int) $candidateId);
+        });
 
-        return (new NotifyClient($candidates, $employer))->preview();
-    }
-
-    private function collectCandidatesFromRequest($request)
-    {
-        return collect($request)
-        ->reject(function ($value, $key) {
-            return $key == '_token' || $key == 'path';
-        })->map(function($value) {
-            return Candidate::findOrFail($value);
-        })->values();
+        return (new NotifyClient($candidates, $employers->first()))->preview();
     }
 }

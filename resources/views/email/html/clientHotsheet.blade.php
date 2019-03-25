@@ -12,7 +12,7 @@
         <tr>
             <td valign="center" style="color: #505050; font-family: Helvetica, sans-serif; font-size: 16px; line-height: 150%; text-align: left; padding: 12px 20px;">
                 <h1 style="color: #505050; font-family: 'Trebuchet MS', Verdana, Arial, sans-serif; font-size: 18px; line-height: 110%; text-align: left; font-weight: bold;">
-                    Top {{ $industry }} Candidates on the Market
+                    Top Candidates on the Market
                 </h1>
                 <p style="color: #505050; font-family: 'Trebuchet MS', Verdana, Arial, sans-serif; font-size: 12px; line-height: 110%; text-align: left;">
                     At Kimmel &amp; Associates, we
@@ -46,57 +46,31 @@
                     <p style="color: #505050; font-family: 'Trebuchet MS', Verdana, Arial, sans-serif; font-size: 12px; line-height: 110%; text-align: left;">
                         <a style="color: #e87600;" href="{{$contactLink}}?subject=Candidate-{{$candidate->walter_id}}"><strong>
                             {{ $candidate->walter_id }} – {{ $candidate->job_title }}
-                                @if(!empty($candidate->city) && !empty($candidate->state))
-                                    ( {{ $candidate->city }}, {{ $candidate->state }} )
-                                @elseif(!empty($candidate->state))
-                                    ( {{$candidate->state}} )
+                                @if(!empty($candidate->location_preference))
+                                    ( {{ $candidate->location_preference }} )
                                 @endif
                         </strong></a>
-                        – {{ $candidate->summary }}
+                        {{ $candidate->industry }} – {{ $candidate->summary }}
                     </p>
                 @endforeach
                 <!--Hotsheet End-->
-
-                <p style="color: #505050; font-family: 'Trebuchet MS', Verdana, Arial, sans-serif; font-size: 12px; line-height: 110%; text-align: center;">
-                    <a style="color: #e87600;" href="http://kimmel.com/jobs/?utm_source=ConNews918&amp;utm_medium=email&amp;utm_term=construction&amp;utm_content=hotsheet&amp;utm_campaign=ConNews918">
-                        <img style="width: 100%;" src="https://media.kimmel.com/assets/img/uploads/kimmel-jobs/kimmel-jobs.jpg" alt=""/>
-                    </a>
-                </p>
-                <h1 style="color: #505050; font-family: 'Trebuchet MS', Verdana, Arial, sans-serif; font-size: 18px; line-height: 110%; text-align: left; font-weight: bold;">
-                    <a style="color: #e87600;" href="https://kimmel.com/candidates/offering-and-accepting-counteroffers-its-a-mistake.html?utm_source=ConNews918&amp;utm_medium=email&amp;utm_term=construction&amp;utm_content=hotsheet&amp;utm_campaign=ConNews918">
-                        Offering and Accepting
-                        Counteroffers: It’s a
-                        Mistake!
-                    </a>
+                <br>
+                <!--Signature -->
+                <h1 style="color: #505050; font-family: 'Trebuchet MS', Verdana, Arial, sans-serif; font-size: 18px; line-height: 110%; text-align: left; font-weight: normal;">
+                    <div class="t m0 xd h5 y5f ff2 fs1 fc3 sc0 ls26 ws0" style="font-size: 15px; font-weight: bold; color:rgb(232,117,0);">JUSTIN WILKINS</div>
+                    <div class="t m0 xd h6 y60 ff3 fs1 fc4 sc0 ls27 ws0" style="font-size: 15px; font-style: italic; color:rgb(84,84,84);">Vice President</div>
+                    <div class="t m0 xd h6 y61 ff3 fs1 fc4 sc0 ls28 ws0" style="font-size: 15px; font-style: italic; color:rgb(84,84,84);">Industrial &amp; Energy Construction</div>
+                    <div class="t m0 xd h6 y62 ff3 fs1 fc4 sc0 ls29 ws0" style="font-size: 15px; font-style: italic; color:rgb(84,84,84);">Kimmel &amp; Associates</div>
+                    <div class="t m0 xd h7 y63 ff4 fs1 fc4 sc0 ls2a ws0" style="font-size: 15px; font-style: italic; color:rgb(84,84,84);">Direct: <span class="fc5 ls2b">{{$phone}}</span></div>
                 </h1>
-                <p style="color: #505050; font-family: 'Trebuchet MS', Verdana, Arial, sans-serif; font-size: 12px; line-height: 110%; text-align: left;">
-                    If you have been in the workforce
-                    long enough, chances are good that
-                    you have some experience with
-                    counteroffers. But despite how
-                    common they are, the truth is that
-                    counteroffers are a bad idea for
-                    both employees and employers.
-                    <strong>Need proof?</strong> How
-                    about this: back in 2015, DeAndre
-                    Jordan accepted a counteroffer.
-                    After verbally accepting a
-                    four-year, $80 million deal with the
-                    Dallas Mavericks, Jordan faced
-                    pressure from his coaches and his
-                    teammates in Los Angeles, and he
-                    decided to stay with the Clippers in
-                    exchange for a pay raise. How did
-                    that work out for Jordan and the
-                    Clippers?
-                    <strong>No one benefits in the long run…</strong>
-                    <a style="color: #e87600;" href="https://kimmel.com/candidates/offering-and-accepting-counteroffers-its-a-mistake.html?utm_source=ConNews918&amp;utm_medium=email&amp;utm_term=construction&amp;utm_content=hotsheet&amp;utm_campaign=ConNews918">
-                        Here’s Why
-                    </a>
-                </p>
             </td>
         </tr>
     </tbody>
 </table>
+<p style="color: #505050; font-family: 'Trebuchet MS', Verdana, Arial, sans-serif; font-size: 12px; line-height: 110%; text-align: center;">
+    <a style="color: #e87600;" href="{{$contactLink}}">
+        <img style="width: 100%;" src="{{ asset('Kimmel-Banner.png') }}" alt=""/>
+    </a>
+</p>
 
 @include('email.partials.hotsheetFooter')

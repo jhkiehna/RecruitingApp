@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Employer;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use App\EmailHistory;
+use App\Candidate;
+use Illuminate\Support\Facades\DB;
 
 class EmployerController extends Controller
 {
@@ -44,21 +47,22 @@ class EmployerController extends Controller
     {
         $request->validate(
             [
-                'walterID' => 'numeric|nullable',
-                'firstName' => 'required|alpha|max:255',
-                'lastName' => 'required|alpha|max:255',
+                'walter_id' => 'numeric|nullable|unique:employers,walter_id|unique:candidates,walter_id',
+                'firstName' => 'required|string|max:255',
+                'lastName' => 'required|string|max:255',
                 'company' => 'required|max:255',
                 'email' => 'required|max:255|unique:employers,email',
             ],
             [
-                'walterID.numeric' => 'A Walter Id can only contain numbers',
+                'walter_id.numeric' => 'A Walter Id can only contain numbers',
+                'walter_id.unique' => 'This walter id already exists for another employer or candidate',
 
                 'firstName.required' => 'First Name is required',
-                'firstName.alpha' => 'First Name can only contain letters',
+                'firstName.string' => 'First Name can only be a string',
                 'firstName.max' => 'The First Name you entered is too long',
 
                 'lastName.required' => 'Last Name is required',
-                'lastName.alpha' => 'Last Name can only contain letters',
+                'lastName.string' => 'Last Name can only be a string',
                 'lastName.max' => 'The Last Name you entered is too long',
 
                 'company.required' => 'A company name is required for employers',
@@ -71,7 +75,7 @@ class EmployerController extends Controller
         );
         try {
             Employer::create([
-                'walter_id' => $request->walterID,
+                'walter_id' => $request->walter_id,
                 'first_name' => $request->firstName,
                 'last_name' => $request->lastName,
                 'company' => $request->company,
@@ -106,8 +110,22 @@ class EmployerController extends Controller
     public function edit($employerId)
     {
         $employer = Employer::findOrFail($employerId);
+        $emailHistories = EmailHistory::select(DB::raw('candidate_id, count(candidate_id) as times'))
+            ->where('employer_id', $employer->id)
+            ->groupBy('candidate_id')
+            ->get();
+
+        $emailHistories = $emailHistories->map(function ($emailHistory) {
+            $candidate = Candidate::find($emailHistory->candidate_id);
+            $emailHistory->candidate_name = $candidate->first_name. ' ' .$candidate->last_name;
+            return $emailHistory;
+        });
         
-        return view('admin/editEmployer')->with(['employer' => $employer]);
+        return view('admin/editEmployer')
+            ->with([
+                'employer' => $employer,
+                'emailHistories' => $emailHistories,
+            ]);
     }
 
     /**
@@ -122,21 +140,22 @@ class EmployerController extends Controller
         $employer = Employer::findOrFail($employerId);
         $request->validate(
             [
-                'walterID' => 'numeric|nullable',
-                'firstName' => 'required|alpha|max:255',
-                'lastName' => 'required|alpha|max:255',
+                'walter_id' => 'numeric|nullable|unique:employers,walter_id,'. $employer->id .'|unique:candidates,walter_id',
+                'firstName' => 'required|string|max:255',
+                'lastName' => 'required|string|max:255',
                 'company' => 'required|max:255',
                 'email' => 'required|max:255|unique:employers,email,'. $employer->id,
             ],
             [
-                'walterID.numeric' => 'A Walter Id can only contain numbers',
+                'walter_id.numeric' => 'A Walter Id can only contain numbers',
+                'walter_id.unique' => 'This walter id already exists for another employer or candidate',
 
                 'firstName.required' => 'First Name is required',
-                'firstName.alpha' => 'First Name can only contain letters',
+                'firstName.string' => 'First Name must be a string',
                 'firstName.max' => 'The First Name you entered is too long',
 
                 'lastName.required' => 'Last Name is required',
-                'lastName.alpha' => 'Last Name can only contain letters',
+                'lastName.string' => 'Last Name must be a string',
                 'lastName.max' => 'The Last Name you entered is too long',
 
                 'company.required' => 'A company name is required for employers',
@@ -150,7 +169,7 @@ class EmployerController extends Controller
 
         try {
             $employer->update([
-                'walter_id' => $request->walterID,
+                'walter_id' => $request->walter_id,
                 'first_name' => $request->firstName,
                 'last_name' => $request->lastName,
                 'company' => $request->company,

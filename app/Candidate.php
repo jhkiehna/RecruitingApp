@@ -18,8 +18,7 @@ class Candidate extends Model
         'job_title',
         'industry',
         'summary',
-        'city',
-        'state',
+        'location_preference',
         'email',
     ];
 
@@ -43,24 +42,18 @@ class Candidate extends Model
             'walter_id' => $this->walter_id,
             'name' => $this->full_name,
             'industry' => $this->industry,
-            'summary' => $this->job_title . ' - ' . $summary,
-            'city' => $this->city,
-            'state' => $this->state,
+            'job_title' => $this->job_title,
+            'location_preference' => $this->location_preference,
         ];
     }
 
     public function getWalterIdAttribute($walter_id)
     {
-        return $walter_id ?? 'No ID';
+        return $walter_id;
     }
 
     public function getFullNameAttribute()
     {
         return $this->first_name .' '. $this->last_name;
-    }
-
-    public function setStateAttribute($value)
-    {
-        $this->attributes['state'] = strtoupper($value);
     }
 }

@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col">
-            <div class="card" style="width: 100%;">
+            <div class="card">
                 <div class="card-header">Dashboard</div>
 
                 <div class="card-body">
@@ -23,10 +23,12 @@
                         </div>
                     </div>
 
+                    @include('admin.partials.candidates')
+
+                    <hr>
+
                     @include('admin.partials.employers')
                     @include('email.modals.email-employer-form')
-
-                    @include('admin.partials.candidates')
                 </div>
             </div>
         </div>

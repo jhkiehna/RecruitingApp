@@ -10,9 +10,8 @@
                 <th>Walter ID</th>
                 <th>Name</th>
                 <th>Industry</th>
-                <th>Summary</th>
-                <th>City</th>
-                <th>State</th>
+                <th>Job Title</th>
+                <th>Location Preference</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -30,9 +29,8 @@
                 {data: 'walter_id', name: 'walter_id'},
                 {data: 'name', name: 'name'},
                 {data: 'industry', name: 'industry'},
-                {data: 'summary', name: 'summary'},
-                {data: 'city', name: 'city'},
-                {data: 'state', name: 'state'},
+                {data: 'job_title', name: 'job_title'},
+                {data: 'location_preference', name: 'location_preference'},
                 {
                     data: null, 
                     name: 'action',
