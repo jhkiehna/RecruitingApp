@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use App\Employer;
+use App\EmailHistory;
 
 class NotifyClient extends Mailable
 {
@@ -39,6 +40,14 @@ class NotifyClient extends Mailable
      */
     public function build()
     {
+
+        $this->candidates->each(function ($candidate) {
+            EmailHistory::create([
+                'employer_id' => $this->employer->id,
+                'candidate_id' => $candidate->id,
+            ]);
+        });
+
         return $this->from($this->fromAddress)
             ->subject('Top Candidates on the Market')
             ->view('email.html.clientHotsheet')
