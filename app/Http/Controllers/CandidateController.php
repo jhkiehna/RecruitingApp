@@ -80,7 +80,7 @@ class CandidateController extends Controller
                 'industry.string'       => 'The industry must be a string',
 
                 'summary.required'      => 'A summary of the candidate is required',
-                'summary.max'           => 'A summary cannot be longer than 65,000 characters. You entered '. strlen($request->summary),
+                'summary.max'           => 'A summary cannot be longer than 65,000 characters. You entered ',
                 'summary.string'        => 'The summary must be a string',
             ]
         );
@@ -143,7 +143,7 @@ class CandidateController extends Controller
                 'firstName'         => 'required|string|max:255',
                 'lastName'          => 'required|string|max:255',
                 'email'             => 'nullable|max:255|email|unique:candidates,email,'. $candidate->id.'|unique:employers,email',
-                'locationPreference' => 'mad:255|nullable|string',
+                'locationPreference' => 'max:255|nullable|string',
                 'jobTitle'          => 'max:255|nullable|string',
                 'industry'          => 'required|max:255|string',
                 'summary'           => 'required|max:65000|string',
@@ -175,7 +175,7 @@ class CandidateController extends Controller
                 'industry.string'       => 'The industry must be a string',
 
                 'summary.required'      => 'A summary of the candidate is required',
-                'summary.max'           => 'A summary cannot be longer than 65,000 characters. You entered '. strlen($request->summary),
+                'summary.max'           => 'A summary cannot be longer than 65,000 characters.',
                 'summary.string'        => 'The summary must be a string',
             ]
         );

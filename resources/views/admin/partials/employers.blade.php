@@ -6,7 +6,7 @@
 
     <br>
 
-    <p>Select all the Employers you wish to email, or Press Email All Employers.<br>
+    <p>Select all the Employers you wish to email, if none are selected, then all Employers will be emailed.<br>
         <span class="keyboard-key">⇧ Shift</span>+Click to select multiple rows.<br>
         <span class="keyboard-key">Ctrl</span>+Click (Windows) or <span class="keyboard-key">⌘</span>+Click (Mac) to select additional rows.
     </p>
