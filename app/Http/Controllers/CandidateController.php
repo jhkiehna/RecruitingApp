@@ -48,7 +48,7 @@ class CandidateController extends Controller
                 'firstName'             => 'required|string|max:255',
                 'lastName'              => 'required|string|max:255',
                 'email'                 => 'max:255|email|nullable|unique:candidates,email|unique:employers,email',
-                'locationPreference'    => 'max:255|string|nullable', 
+                'locationPreference'    => 'max:255|string|nullable',
                 'jobTitle'              => 'max:255|string|nullable',
                 'industry'              => 'required|max:255|string',
                 'summary'               => 'required|max:65000|string',
@@ -80,7 +80,7 @@ class CandidateController extends Controller
                 'industry.string'       => 'The industry must be a string',
 
                 'summary.required'      => 'A summary of the candidate is required',
-                'summary.max'           => 'A summary cannot be longer than 65,000 characters. You entered ',
+                'summary.max'           => 'A summary cannot be longer than 65,000 characters.',
                 'summary.string'        => 'The summary must be a string',
             ]
         );
