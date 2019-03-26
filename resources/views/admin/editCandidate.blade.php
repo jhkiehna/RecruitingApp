@@ -53,7 +53,7 @@
 
                         <div class="form-group">
                             <label for="locationPreference">Location Preference (Optional)</label>
-                            <input class="form-control {{$errors->has('locationPreference') ? 'alert alert-danger' : ''}}" type="text" name="locationPreference" id="locationPreference" placeholder="..." value="{{old('locationPreference')}}">
+                            <input class="form-control {{$errors->has('locationPreference') ? 'alert alert-danger' : ''}}" type="text" name="locationPreference" id="locationPreference" placeholder="..." value="{{old('locationPreference') ?? $candidate->location_preference}}">
                         </div>
 
                         <div class="form-group">
