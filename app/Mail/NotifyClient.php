@@ -17,13 +17,14 @@ class NotifyClient extends Mailable
     protected $fromAddress;
     protected $fromName;
     private $phone;
+    private $noHistory;
     
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($candidates, Employer $employer)
+    public function __construct($candidates, Employer $employer, $noHistory = false)
     {
         $this->candidates = $candidates;
         $this->employer = $employer;
@@ -31,6 +32,8 @@ class NotifyClient extends Mailable
         $this->fromAddress = config('mail.from.address');
         $this->fromName = config('mail.from.name');
         $this->phone = config('mail.phone_number');
+
+        $this->noHistory = $noHistory;
     }
    
     /**
@@ -41,12 +44,14 @@ class NotifyClient extends Mailable
     public function build()
     {
 
-        $this->candidates->each(function ($candidate) {
-            EmailHistory::create([
-                'employer_id' => $this->employer->id,
-                'candidate_id' => $candidate->id,
-            ]);
-        });
+        if ($this->noHistory == false) {
+            $this->candidates->each(function ($candidate) {
+                EmailHistory::create([
+                    'employer_id' => $this->employer->id,
+                    'candidate_id' => $candidate->id,
+                ]);
+            });
+        }
 
         return $this->from($this->fromAddress)
             ->subject('Top Candidates on the Market')
