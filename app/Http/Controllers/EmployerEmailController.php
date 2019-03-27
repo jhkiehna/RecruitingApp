@@ -34,7 +34,7 @@ class EmployerEmailController extends Controller
         });
 
         Mail::to(config('mail.from.address'))
-            ->queue(new NotifyClient($candidates, $employers->first()));
+            ->queue(new NotifyClient($candidates, $employers->first(), true));
 
         return redirect()->route('dashboard')->withStatus('Email(s) sent to ' . $employers->count() . ' employer(s) - A Copy was sent to ' . config('mail.from.address'));
     }
