@@ -70,7 +70,7 @@ class NotifyClient extends Mailable
         return view('email.html.clientHotsheet')->with([
             'candidates' => $this->candidates,
             'employer' => $this->employer,
-            'contactLink' => 'mailto:testlink@test.com',
+            'contactLink' => 'mailto:' . $this->fromAddress,
             'phone' => $this->phone,
         ]);
     }
